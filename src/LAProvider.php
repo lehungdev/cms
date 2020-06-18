@@ -1,13 +1,13 @@
 <?php
 
-namespace Dwij\Laraadmin;
+namespace Lehungdev/Cms;
 
 use Artisan;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\ServiceProvider;
 
-use Dwij\Laraadmin\Helpers\LAHelper;
+use Lehungdev/Cms\Helpers\LAHelper;
 
 class LAProvider extends ServiceProvider
 {
@@ -30,7 +30,7 @@ class LAProvider extends ServiceProvider
         //echo "Laraadmin Migrations started...";
         // Artisan::call('migrate', ['--path' => "vendor/dwij/laraadmin/src/Migrations/"]);
         //echo "Migrations completed !!!.";
-        // Execute by php artisan vendor:publish --provider="Dwij\Laraadmin\LAProvider"
+        // Execute by php artisan vendor:publish --provider="Lehungdev/Cms\LAProvider"
 
 		/*
         |--------------------------------------------------------------------------
@@ -103,19 +103,19 @@ class LAProvider extends ServiceProvider
         $loader->alias('Gravatar', \Creativeorange\Gravatar\Facades\Gravatar::class);
 
         // For LaraAdmin Code Generation
-        $loader->alias('CodeGenerator', \Dwij\Laraadmin\CodeGenerator::class);
+        $loader->alias('CodeGenerator', \Lehungdev/Cms\CodeGenerator::class);
 
         // For LaraAdmin Form Helper
-        $loader->alias('LAFormMaker', \Dwij\Laraadmin\LAFormMaker::class);
+        $loader->alias('LAFormMaker', \Lehungdev/Cms\LAFormMaker::class);
 
         // For LaraAdmin Helper
-        $loader->alias('LAHelper', \Dwij\Laraadmin\Helpers\LAHelper::class);
+        $loader->alias('LAHelper', \Lehungdev/Cms\Helpers\LAHelper::class);
 
         // LaraAdmin Module Model
-        $loader->alias('Module', \Dwij\Laraadmin\Models\Module::class);
+        $loader->alias('Module', \Lehungdev/Cms\Models\Module::class);
 
 		// For LaraAdmin Configuration Model
-		$loader->alias('LAConfigs', \Dwij\Laraadmin\Models\LAConfigs::class);
+		$loader->alias('LAConfigs', \Lehungdev/Cms\Models\LAConfigs::class);
 
         // For Entrust
 		$loader->alias('Entrust', \Trebol\Entrust\EntrustFacade::class);
@@ -129,9 +129,9 @@ class LAProvider extends ServiceProvider
         |--------------------------------------------------------------------------
         */
 
-        $this->app->make('Dwij\Laraadmin\Controllers\ModuleController');
-        $this->app->make('Dwij\Laraadmin\Controllers\FieldController');
-        $this->app->make('Dwij\Laraadmin\Controllers\MenuController');
+        $this->app->make('Lehungdev/Cms\Controllers\ModuleController');
+        $this->app->make('Lehungdev/Cms\Controllers\FieldController');
+        $this->app->make('Lehungdev/Cms\Controllers\MenuController');
 
 		// For LAEditor
 		if(file_exists(__DIR__.'/../../laeditor')) {
@@ -197,10 +197,10 @@ class LAProvider extends ServiceProvider
         */
 
 		$commands = [
-            \Dwij\Laraadmin\Commands\Migration::class,
-            \Dwij\Laraadmin\Commands\Crud::class,
-            \Dwij\Laraadmin\Commands\Packaging::class,
-            \Dwij\Laraadmin\Commands\LAInstall::class
+            \Lehungdev/Cms\Commands\Migration::class,
+            \Lehungdev/Cms\Commands\Crud::class,
+            \Lehungdev/Cms\Commands\Packaging::class,
+            \Lehungdev/Cms\Commands\LAInstall::class
         ];
 
 		// For LAEditor

@@ -4,20 +4,20 @@
  * Help: http://laraadmin.com
  */
 
-namespace Dwij\Laraadmin\Controllers;
+namespace Lehungdev/Cms\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use DB;
-use Dwij\Laraadmin\Helpers\LAHelper;
-use Dwij\Laraadmin\Models\Module;
-use Dwij\Laraadmin\Models\ModuleFields;
-use Dwij\Laraadmin\Models\ModuleFieldTypes;
-use Dwij\Laraadmin\CodeGenerator;
+use Lehungdev/Cms\Helpers\LAHelper;
+use Lehungdev/Cms\Models\Module;
+use Lehungdev/Cms\Models\ModuleFields;
+use Lehungdev/Cms\Models\ModuleFieldTypes;
+use Lehungdev/Cms\CodeGenerator;
 use App\Role;
 use Schema;
-use Dwij\Laraadmin\Models\Menu;
+use Lehungdev/Cms\Models\Menu;
 
 class ModuleController extends Controller
 {

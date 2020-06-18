@@ -1,10 +1,10 @@
 <?php
-namespace Dwij\Laraadmin;
+namespace Lehungdev/Cms;
 
 use Schema;
 use Collective\Html\FormFacade as Form;
-use Dwij\Laraadmin\Models\Module;
-use Dwij\Laraadmin\Models\ModuleFieldTypes;
+use Lehungdev/Cms\Models\Module;
+use Lehungdev/Cms\Models\ModuleFieldTypes;
 
 class LAFormMaker
 {

@@ -1,12 +1,12 @@
 <?php
-namespace Dwij\Laraadmin;
+namespace Lehungdev/Cms;
 
 use Exception;
 use Illuminate\Filesystem\Filesystem;
-use Dwij\Laraadmin\Models\Module;
-use Dwij\Laraadmin\Models\ModuleFieldTypes;
-use Dwij\Laraadmin\Helpers\LAHelper;
-use Dwij\Laraadmin\Models\Menu;
+use Lehungdev/Cms\Models\Module;
+use Lehungdev/Cms\Models\ModuleFieldTypes;
+use Lehungdev/Cms\Helpers\LAHelper;
+use Lehungdev/Cms\Models\Menu;
 
 class CodeGenerator
 {
@@ -130,7 +130,7 @@ class CodeGenerator
         $templateDirectory = __DIR__.'/stubs';
 
         LAHelper::log("info", "Appending routes...", $comm);
-        if(\Dwij\Laraadmin\Helpers\LAHelper::laravel_ver() > 5.3) {
+        if(\Lehungdev/Cms\Helpers\LAHelper::laravel_ver() > 5.3) {
 			$routesFile = base_path('routes/admin_routes.php');
 		} else {
 			$routesFile = app_path('Http/admin_routes.php');

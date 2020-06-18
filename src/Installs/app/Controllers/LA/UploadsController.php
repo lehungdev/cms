@@ -14,8 +14,8 @@ use Illuminate\Support\Facades\Response as FacadeResponse;
 use Illuminate\Support\Facades\Input;
 use Collective\Html\FormFacade as Form;
 
-use Dwij\Laraadmin\Models\Module;
-use Dwij\Laraadmin\Helpers\LAHelper;
+use Lehungdev/Cms\Models\Module;
+use Lehungdev/Cms\Helpers\LAHelper;
 use Trebol\Entrust\EntrustFacade as Entrust;
 
 use Auth;
