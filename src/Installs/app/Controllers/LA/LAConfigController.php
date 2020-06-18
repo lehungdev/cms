@@ -1,7 +1,10 @@
 <?php
 /**
- * Controller generated using Cms
- * Help: http://Cms.com
+ * Controller generated using IdeaGroup
+ * Help: lehung.hut@gmail.com
+ * Cms is open-sourced software licensed under the MIT license.
+ * Developed by: Lehungdev IT Solutions
+ * Developer Website: http://ideagroup.vn
  */
 
 namespace App\Http\Controllers\LA;
@@ -65,6 +68,6 @@ class LAConfigController extends Controller
 			LAConfigs::where('key', $key)->update(['value' => $value]);
 		}
 		
-		return redirect(config('Cms.adminRoute')."/la_configs");
+		return redirect(config('cms.adminRoute')."/la_configs");
 	}	
 }

@@ -1,7 +1,10 @@
 <?php
 /**
- * Model generated using Cms
- * Help: http://Cms.com
+ * Model generated using IdeaGroup
+ * Help: lehung.hut@gmail.com
+ * Cms is open-sourced software licensed under the MIT license.
+ * Developed by: Lehungdev IT Solutions
+ * Developer Website: http://ideagroup.vn
  */
 
 namespace App;
@@ -12,11 +15,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Permission extends EntrustPermission
 {
     use SoftDeletes;
-
+	
 	protected $table = 'permissions';
-
+	
 	protected $hidden = [
-
+        
     ];
 
 	protected $guarded = [];

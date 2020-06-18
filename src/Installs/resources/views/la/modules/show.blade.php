@@ -4,6 +4,7 @@
 
 <?php
 use Lehungdev\Cms\Models\Module;
+use Lehungdev\Cms\Models\ModuleFields;
 ?>
 
 @section('main-content')
@@ -20,7 +21,7 @@ use Lehungdev\Cms\Models\Module;
 					<div class="profile-icon text-primary"><i class="fa {{$module->fa_icon}}"></i></div>
 				</div>
 				<div class="col-md-9">
-					<a class="text-white" href="{{ url(config('Cms.adminRoute') . '/'.$module->name_db) }}"><h4 data-toggle="tooltip" data-placement="left" title="Open {{ $module->model }} Module" class="name">{{ $module->label }}</h4></a>
+					<a class="text-white" href="{{ url(config('cms.adminRoute') . '/'.$module->name_db) }}"><h4 data-toggle="tooltip" data-placement="left" title="Open {{ $module->model }} Module" class="name">{{ $module->label }}</h4></a>
 					<div class="row stats">
 						<div class="col-md-12">{{ Module::itemCount($module->name) }} Items</div>
 					</div>
@@ -61,7 +62,7 @@ use Lehungdev\Cms\Models\Module;
 	</div>
 
 	<ul id="module-tabs" data-toggle="ajax-tab" class="nav nav-tabs profile" role="tablist">
-		<li class=""><a href="{{ url(config('Cms.adminRoute') . '/modules') }}" data-toggle="tooltip" data-placement="right" title="Back to Modules"> <i class="fa fa-chevron-left"></i>&nbsp;</a></li>
+		<li class=""><a href="{{ url(config('cms.adminRoute') . '/modules') }}" data-toggle="tooltip" data-placement="right" title="Back to Modules"> <i class="fa fa-chevron-left"></i>&nbsp;</a></li>
 		
 		<li class="tab-pane" id="fields">
 			<a id="tab_fields" role="tab" data-toggle="tab" class="tab_info" href="#fields" data-target="#tab-info"><i class="fa fa-bars"></i> Module Fields</a>
@@ -99,8 +100,10 @@ use Lehungdev\Cms\Models\Module;
 							<th>Min</th>
 							<th>Max</th>
 							<th>Required</th>
+							<th>Listing</th>
+							<th>Languege</th>
 							<th style="max-width:300px;">Values</th>
-							<th><i class="fa fa-cogs"></i></th>
+							<th style="min-width:60px;"><i class="fa fa-cogs"></i></th>
 						</tr>
 						</thead>
 						<tbody>														
@@ -116,12 +119,28 @@ use Lehungdev\Cms\Models\Module;
 									<td>{{ $field['minlength'] }}</td>
 									<td>{{ $field['maxlength'] }}</td>
 									<td>@if($field['required']) <span class="text-danger">True</span>@endif </td>
-									<td><?php echo LAHelper::parseValues($field['popup_vals']) ?></td>
 									<td>
-										<a href="{{ url(config('Cms.adminRoute') . '/module_fields/'.$field['id'].'/edit') }}" class="btn btn-edit-field btn-warning btn-xs" style="display:inline;padding:2px 5px 3px 5px;" id="edit_{{ $field['colname'] }}"><i class="fa fa-edit"></i></a>
-										<a href="{{ url(config('Cms.adminRoute') . '/module_fields/'.$field['id'].'/delete') }}" class="btn btn-edit-field btn-danger btn-xs" style="display:inline;padding:2px 5px 3px 5px;" id="delete_{{ $field['colname'] }}"><i class="fa fa-trash"></i></a>
+										<form id="listing_view_cal" action="{{ url(config('cms.adminRoute') . '/module_field_listing_show') }}">
+											<input name="ref_{!! $field['id'] !!}" type="checkbox" @if($field['listing_col'] == 1) checked="checked" @endif>
+											<div class="Switch Ajax Round @if($field['listing_col'] == 1) On @else Off @endif" listid="{{ $field['id'] }}">
+												<div class="Toggle"></div>
+											</div>
+										</form>
+									</td>
+									<td>
+										<form id="lang_active_cal" action="{{ url(config('cms.adminRoute') . '/module_field_lang_active') }}">
+											<input name="ref_{!! $field['id'] !!}" type="checkbox" @if($field['lang_active'] == 1) checked="checked" @endif>
+											<div class="Switch Ajax Lang Round @if($field['lang_active'] == 1) On @else Off @endif" lang_activeid="{{ $field['id'] }}">
+												<div class="Toggle"></div>
+											</div>
+										</form>
+									</td>
+									<td style="max-width:300px;"><?php echo LAHelper::parseValues($field['popup_vals']) ?></td>
+									<td style="min-width:60px;">
+										<a href="{{ url(config('cms.adminRoute') . '/module_fields/'.$field['id'].'/edit') }}" class="btn btn-edit-field btn-warning btn-xs" style="display:inline;padding:2px 5px 3px 5px;" id="edit_{{ $field['colname'] }}"><i class="fa fa-edit"></i></a>
+										<a href="{{ url(config('cms.adminRoute') . '/module_fields/'.$field['id'].'/delete') }}" class="btn btn-edit-field btn-danger btn-xs" style="display:inline;padding:2px 5px 3px 5px;" id="delete_{{ $field['colname'] }}"><i class="fa fa-trash"></i></a>
 										@if($field['colname'] != $module->view_col)
-											<a href="{{ url(config('Cms.adminRoute') . '/modules/'.$module->id.'/set_view_col/'.$field['colname']) }}" class="btn btn-edit-field btn-success btn-xs" style="display:inline;padding:2px 5px 3px 5px;" id="view_col_{{ $field['colname'] }}"><i class="fa fa-eye"></i></a>
+											<a href="{{ url(config('cms.adminRoute') . '/modules/'.$module->id.'/set_view_col/'.$field['colname']) }}" class="btn btn-edit-field btn-success btn-xs" style="display:inline;padding:2px 5px 3px 5px;" id="view_col_{{ $field['colname'] }}"><i class="fa fa-eye"></i></a>
 										@endif
 									</td>
 								</tr>
@@ -137,7 +156,7 @@ use Lehungdev\Cms\Models\Module;
 				<span class="pull-left">Module Access for Roles</span>
 				<i class="fa fa-circle gray"></i> Invisible <i class="fa fa-circle orange"></i> Read-Only <i class="fa fa-circle green"></i> Write
 			</div>
-			<form action="{{ url(config('Cms.adminRoute') . '/save_role_module_permissions/'.$module->id) }}" method="post">
+			<form action="{{ url(config('cms.adminRoute') . '/save_role_module_permissions/'.$module->id) }}" method="post">
 				<input type="hidden" name="_token" value="{{ csrf_token() }}">
 				<table class="table table-bordered dataTable no-footer table-access">
 					<thead>
@@ -228,7 +247,7 @@ use Lehungdev\Cms\Models\Module;
 				<p class="text-danger">Note: Migration file will not be deleted but modified.</p>
 			</div>
 			<div class="modal-footer">
-				{{ Form::open(['route' => [config('Cms.adminRoute') . '.modules.destroy', 0], 'id' => 'module_del_form', 'method' => 'delete', 'style'=>'display:inline']) }}
+				{{ Form::open(['route' => [config('cms.adminRoute') . '.modules.destroy', 0], 'id' => 'module_del_form', 'method' => 'delete', 'style'=>'display:inline']) }}
 					<button class="btn btn-danger btn-delete pull-left" type="submit">Yes</button>
 				{{ Form::close() }}
 				<a data-dismiss="modal" class="btn btn-default pull-right" >No</a>				
@@ -246,7 +265,7 @@ use Lehungdev\Cms\Models\Module;
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 				<h4 class="modal-title" id="myModalLabel">Add {{ $module->model }} Field</h4>
 			</div>
-			{!! Form::open(['route' => config('Cms.adminRoute') . '.module_fields.store', 'id' => 'field-form']) !!}
+			{!! Form::open(['route' => config('cms.adminRoute') . '.module_fields.store', 'id' => 'field-form']) !!}
 			{{ Form::hidden("module_id", $module->id) }}
 			<div class="modal-body">
 				<div class="box-body">
@@ -257,7 +276,29 @@ use Lehungdev\Cms\Models\Module;
 					
 					<div class="form-group">
 						<label for="colname">Column Name :</label>
-						{{ Form::text("colname", null, ['class'=>'form-control', 'placeholder'=>'Column Name (lowercase)', 'data-rule-minlength' => 2, 'data-rule-maxlength'=>20, 'data-rule-banned-words' => 'true', 'required' => 'required']) }}
+						<?php
+						$columns = Schema::getColumnListing($module->name_db);
+						
+						$col_list = array();
+						foreach($columns as $col) {
+							// check if this column exists in Module
+							$field = ModuleFields::where('colname', $col)->where('module', $module->id)->first();
+							if($col != 'id' && $col != 'deleted_at' && $col != 'created_at' && $col != 'updated_at' && !isset($field->id)) {
+								$column = DB::connection()->getDoctrineColumn($module->name_db, $col);
+								if($column->getDefault() == '') {
+									$default = "None";
+								} else {
+									$default = $column->getDefault();
+								}									
+								$col_list[$col] = $col." - ".$column->getType().' - '.$column->getLength().' - '.$default; 
+							}
+						}
+
+						if($module->is_gen == 0 && count($col_list) > 0) { ?>
+							{{ Form::select("colname", $col_list, $col_list, ['class'=>'form-control', 'required' => 'required']) }}
+						<?php } else { ?>
+							{{ Form::text("colname", null, ['class'=>'form-control', 'placeholder'=>'Column Name (lowercase)', 'data-rule-minlength' => 2, 'data-rule-maxlength'=>20, 'data-rule-banned-words' => 'true', 'required' => 'required']) }}
+						<?php }	?>
 					</div>
 					
 					<div class="form-group">
@@ -298,6 +339,16 @@ use Lehungdev\Cms\Models\Module;
 						<div class="Switch Round Off" style="vertical-align:top;margin-left:10px;"><div class="Toggle"></div></div>
 					</div>
 					
+					<div class="form-group">
+						<label for="listing_col">Show in Index Listing:</label>
+						{{ Form::checkbox("listing_col", "listing_col", false, []) }}
+						<div class="Switch Round Off" style="vertical-align:top;margin-left:10px;"><div class="Toggle"></div></div>
+					</div>
+					<div class="form-group">
+						<label for="lang_active">Show in Index Language:</label>
+						{{ Form::checkbox("lang_active", "lang_active", false, []) }}
+						<div class="Switch Round Off" style="vertical-align:top;margin-left:10px;"><div class="Toggle"></div></div>
+					</div>
 					<!--
 					<div class="form-group">
 						<label for="popup_vals">Values :</label>
@@ -390,7 +441,7 @@ $(function () {
 		$("#module_del_form").attr("action", $url.replace("/0", "/"+module_id));
 		$("#module_delete_confirm").modal('show');
 		$.ajax({
-			url: "{{ url(config('Cms.adminRoute') . '/get_module_files/') }}/" + module_id,
+			url: "{{ url(config('cms.adminRoute') . '/get_module_files/') }}/" + module_id,
 			type:"POST",
 			beforeSend: function() {
 				$("#moduleDeleteFiles").html('<center><i class="fa fa-refresh fa-spin"></i></center>');
@@ -469,7 +520,7 @@ $(function () {
 			});
 			
 			$.ajax({
-				url: "{{ url(config('Cms.adminRoute') . '/save_module_field_sort') }}/"+{{ $module->id }},
+				url: "{{ url(config('cms.adminRoute') . '/save_module_field_sort') }}/"+{{ $module->id }},
 				data : {'sort_array': array},
 				method: 'GET',
 				success: function( data ) {
@@ -486,7 +537,7 @@ $(function () {
 		$fa.addClass("fa-refresh");
 		$fa.addClass("fa-spin");
 		$.ajax({
-			url: "{{ url(config('Cms.adminRoute') . '/module_generate_migr') }}/"+{{ $module->id }},
+			url: "{{ url(config('cms.adminRoute') . '/module_generate_migr') }}/"+{{ $module->id }},
 			method: 'GET',
 			success: function( data ) {
 				$fa.removeClass("fa-refresh");
@@ -503,7 +554,7 @@ $(function () {
 		$fa.addClass("fa-refresh");
 		$fa.addClass("fa-spin");
 		$.ajax({
-			url: "{{ url(config('Cms.adminRoute') . '/module_generate_migr') }}/"+{{ $module->id }},
+			url: "{{ url(config('cms.adminRoute') . '/module_generate_migr') }}/"+{{ $module->id }},
 			method: 'GET',
 			success: function( data ) {
 				$fa.removeClass("fa-refresh");
@@ -520,7 +571,7 @@ $(function () {
 		$fa.addClass("fa-refresh");
 		$fa.addClass("fa-spin");
 		$.ajax({
-			url: "{{ url(config('Cms.adminRoute') . '/module_generate_update') }}/"+{{ $module->id }},
+			url: "{{ url(config('cms.adminRoute') . '/module_generate_update') }}/"+{{ $module->id }},
 			method: 'GET',
 			success: function( data ) {
 				$fa.removeClass("fa-refresh");
@@ -538,7 +589,7 @@ $(function () {
 		$fa.addClass("fa-refresh");
 		$fa.addClass("fa-spin");
 		$.ajax({
-			url: "{{ url(config('Cms.adminRoute') . '/module_generate_migr_crud') }}/"+{{ $module->id }},
+			url: "{{ url(config('cms.adminRoute') . '/module_generate_migr_crud') }}/"+{{ $module->id }},
 			method: 'GET',
 			success: function( data ) {
 				$fa.removeClass("fa-refresh");
@@ -683,6 +734,47 @@ $(function () {
 			$icon.removeClass('fa-chevron-up');
 			$icon.addClass('fa-chevron-down');
 		}
+	});
+
+	$('.Switch.Ajax').click(function() {
+		var state = "false";
+		if ($(this).hasClass('On')) {
+			state = "false";
+		} else {
+			state = "true";
+		}
+		$.ajax({
+			type: "POST",
+			url : "{{ url(config('cms.adminRoute') . '/module_field_listing_show') }}",
+			data : {
+				_token: '{{ csrf_token() }}',
+				listid: $(this).attr("listid"),
+				state: state,
+			},
+			success : function(data){
+				console.log(data);
+			}
+		});
+	});
+	$('.Switch.Ajax.Lang').click(function() {
+		var state = "false";
+		if ($(this).hasClass('On')) {
+			state = "false";
+		} else {
+			state = "true";
+		}
+		$.ajax({
+			type: "POST",
+			url : "{{ url(config('cms.adminRoute') . '/module_field_lang_active') }}",
+			data : {
+				_token: '{{ csrf_token() }}',
+                lang_activeid: $(this).attr("lang_activeid"),
+				state: state,
+			},
+			success : function(data){
+				console.log(data);
+			}
+		});
 	});
 });
 </script>

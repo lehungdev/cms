@@ -1448,6 +1448,7 @@ a:focus {
   border-radius: 0;
   box-shadow: none;
   border-color: #d2d6de;
+  border-radius: 3px;
 }
 .form-control:focus {
   border-color: #48B0F7;
@@ -4571,7 +4572,8 @@ table.text-center th {
 }
 .login-page,
 .register-page {
-  background: #d2d6de;
+  /*background: #d2d6de;*/
+  background-color: #00b5ec;
 }
 .login-box,
 .register-box {
@@ -4591,6 +4593,8 @@ table.text-center th {
   padding: 20px;
   border-top: 0;
   color: #666;
+  box-shadow: 0 14px 24px 0 rgba(50,49,58,.25);
+  border-radius: 6px;
 }
 .login-box-body .form-control-feedback,
 .register-box-body .form-control-feedback {

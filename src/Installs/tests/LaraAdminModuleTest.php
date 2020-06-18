@@ -1,4 +1,11 @@
 <?php
+/**
+ * Code generated using IdeaGroup
+ * Help: lehung.hut@gmail.com
+ * Cms is open-sourced software licensed under the MIT license.
+ * Developed by: Lehungdev IT Solutions
+ * Developer Website: http://ideagroup.vn
+ */
 
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -127,7 +134,7 @@ class CmsModuleTest extends TestCase
 			->select('5', 'field_type')
 			->uncheck('unique')
 			->type('', 'defaultvalue')
-			->check('required')
+			->uncheck('required')
 			->press('Submit');
 		$this->see("StudentsController")
 			->type('Weight', 'label')

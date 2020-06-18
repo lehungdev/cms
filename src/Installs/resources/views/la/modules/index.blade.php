@@ -11,7 +11,8 @@ use Lehungdev\Cms\Models\Module;
 @section("htmlheader_title", "Modules Listing")
 
 @section("headerElems")
-<button class="btn btn-success btn-sm pull-right" data-toggle="modal" data-target="#AddModal">Add Module</button>
+<button class="btn btn-success btn-sm pull-right " data-toggle="modal" data-target="#AddExistModal">Module from Existing Table</button>
+<button class="btn btn-success btn-sm pull-right " style="margin-right:5px;" data-toggle="modal" data-target="#AddModal">Add Module</button>
 @endsection
 
 @section("main-content")
@@ -34,19 +35,65 @@ use Lehungdev\Cms\Models\Module;
 			@foreach ($modules as $module)
 				<tr>
 					<td>{{ $module->id }}</td>
-					<td><a href="{{ url(config('Cms.adminRoute') . '/modules/'.$module->id) }}">{{ $module->label }}</a></td>
+					<td><a href="{{ url(config('cms.adminRoute') . '/modules/'.$module->id) }}">{{ $module->label }}</a></td>
 					<td>{{ $module->name_db }}</td>
 					<td>{{ Module::itemCount($module->name) }}</td>
 					<td>
 						<a module_label="{{ $module->label }}" module_icon="{{ $module->fa_icon }}" module_id="{{ $module->id }}" class="btn btn-primary btn-xs update_module" style="display:inline;padding:2px 5px 3px 5px;"><i class="fa fa-edit"></i></a>
-						<a href="{{ url(config('Cms.adminRoute') . '/modules/'.$module->id)}}#access" class="btn btn-warning btn-xs" style="display:inline;padding:2px 5px 3px 5px;"><i class="fa fa-key"></i></a>
-						<a href="{{ url(config('Cms.adminRoute') . '/modules/'.$module->id)}}#sort" class="btn btn-success btn-xs" style="display:inline;padding:2px 5px 3px 5px;"><i class="fa fa-sort"></i></a>
+						<a href="{{ url(config('cms.adminRoute') . '/modules/'.$module->id)}}#access" class="btn btn-warning btn-xs" style="display:inline;padding:2px 5px 3px 5px;"><i class="fa fa-key"></i></a>
+						<a href="{{ url(config('cms.adminRoute') . '/modules/'.$module->id)}}#sort" class="btn btn-success btn-xs" style="display:inline;padding:2px 5px 3px 5px;"><i class="fa fa-sort"></i></a>
 						<a module_name="{{ $module->name }}" module_id="{{ $module->id }}" class="btn btn-danger btn-xs delete_module" style="display:inline;padding:2px 5px 3px 5px;"><i class="fa fa-trash"></i></a>
 					</td>
 				</tr>
 			@endforeach
 		</tbody>
 		</table>
+	</div>
+</div>
+
+<div class="modal fade" id="AddExistModal" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="myModalLabel">Add Module Of Exist Table</h4>
+			</div>
+			{!! Form::open(['route' => config('cms.adminRoute') . '.modules.store', 'id' => 'module-add-form']) !!}
+			<div class="modal-body">
+				<div class="box-body">
+					<!--<div class="form-group">
+						<label for="name">Module Name :</label>
+						{{ Form::text("name", null, ['class'=>'form-control', 'placeholder'=>'Module Name', 'data-rule-minlength' => 2, 'data-rule-maxlength'=>20, 'required' => 'required']) }}
+					</div>-->				
+					<div class="form-group">
+						<label for="table">Table</label>
+						<?php
+						$default_val ='';
+						$table_module = array();
+						foreach($tables as $table) {
+							$modItems = Module::where('name_db', $table)->first();
+							if(!isset($modItems)) {
+								$table_module[$table] = $table;
+							}
+						}
+						?>
+						{{ Form::select("name", $table_module, $default_val, ['class'=>'form-control', 'rel' => '']) }}
+					</div>
+					<div class="form-group">
+						<label for="icon">Icon</label>
+						<div class="input-group">
+							<input class="form-control" placeholder="FontAwesome Icon" name="icon" type="text" value="fa-cube"  data-rule-minlength="1" required>
+							<span class="input-group-addon"></span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				{!! Form::submit( 'Submit', ['class'=>'btn btn-success']) !!}
+			</div>
+			{!! Form::close() !!}
+		</div>
 	</div>
 </div>
 
@@ -57,7 +104,7 @@ use Lehungdev\Cms\Models\Module;
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 				<h4 class="modal-title" id="myModalLabel">Add Module</h4>
 			</div>
-			{!! Form::open(['route' => config('Cms.adminRoute') . '.modules.store', 'id' => 'module-add-form']) !!}
+			{!! Form::open(['route' => config('cms.adminRoute') . '.modules.store', 'id' => 'module-add-form']) !!}
 			<div class="modal-body">
 				<div class="box-body">
 					<div class="form-group">
@@ -99,7 +146,7 @@ use Lehungdev\Cms\Models\Module;
 				<p class="text-danger">Note: Migration file will not be deleted but modified.</p>
 			</div>
 			<div class="modal-footer">
-				{{ Form::open(['route' => [config('Cms.adminRoute') . '.modules.destroy', 0], 'id' => 'module_del_form', 'method' => 'delete', 'style'=>'display:inline']) }}
+				{{ Form::open(['route' => [config('cms.adminRoute') . '.modules.destroy', 0], 'id' => 'module_del_form', 'method' => 'delete', 'style'=>'display:inline']) }}
 					<button class="btn btn-danger btn-delete pull-left" type="submit">Yes</button>
 				{{ Form::close() }}
 				<a data-dismiss="modal" class="btn btn-default pull-right" >No</a>				
@@ -163,7 +210,7 @@ $(function () {
 		$("#module_del_form").attr("action", $url.replace("/0", "/"+module_id));
 		$("#module_delete_confirm").modal('show');
 		$.ajax({
-			url: "{{ url(config('Cms.adminRoute') . '/get_module_files/') }}/" + module_id,
+			url: "{{ url(config('cms.adminRoute') . '/get_module_files/') }}/" + module_id,
 			type:"POST",
 			beforeSend: function() {
 				$("#moduleDeleteFiles").html('<center><i class="fa fa-refresh fa-spin"></i></center>');
@@ -196,7 +243,7 @@ $(function () {
 			var module_label = $(".module_label_edit").val();
 			var module_icon = $(".module_icon_edit").val();
 			$.ajax({
-				url: "{{ url(config('Cms.adminRoute') . '/module_update') }}",
+				url: "{{ url(config('cms.adminRoute') . '/module_update') }}",
 				type:"POST",
 				data : {'id':module_id,'label':module_label, 'icon':module_icon, '_token': '{{ csrf_token() }}' },
 				success: function(data) {

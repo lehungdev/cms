@@ -3,7 +3,7 @@
 @section("contentheader_title", "Edit Field: ".$field->label)
 @section("contentheader_description", "from ".$module->model." module")
 @section("section", "Module ".$module->name)
-@section("section_url", url(config('Cms.adminRoute') . '/modules/'.$module->id))
+@section("section_url", url(config('cms.adminRoute') . '/modules/'.$module->id))
 @section("sub_section", "Edit Field")
 
 @section("htmlheader_title", "Field Edit : ".$field->label)
@@ -16,7 +16,7 @@
 	<div class="box-body">
 		<div class="row">
 			<div class="col-md-8 col-md-offset-2">
-				{!! Form::model($field, ['route' => [config('Cms.adminRoute') . '.module_fields.update', $field->id ], 'method'=>'PUT', 'id' => 'field-edit-form']) !!}
+				{!! Form::model($field, ['route' => [config('cms.adminRoute') . '.module_fields.update', $field->id ], 'method'=>'PUT', 'id' => 'field-edit-form']) !!}
 					{{ Form::hidden("module_id", $module->id) }}
 					
 					<div class="form-group">
@@ -64,6 +64,18 @@
 						{{ Form::checkbox("required", "required") }}
 						<div class="Switch Round Off" style="vertical-align:top;margin-left:10px;"><div class="Toggle"></div></div>
 					</div>
+
+					<div class="form-group">
+						<label for="listing_col">Show in Index Listing:</label>
+						{{ Form::checkbox("listing_col", "listing_col") }}
+						<div class="Switch Round Off" style="vertical-align:top;margin-left:10px;"><div class="Toggle"></div></div>
+					</div>
+
+					<div class="form-group">
+						<label for="lang_active">Show in Index Language:</label>
+						{{ Form::checkbox("lang_active", "lang_active") }}
+						<div class="Switch Round Off" style="vertical-align:top;margin-left:10px;"><div class="Toggle"></div></div>
+					</div>
 					
 					<div class="form-group values">
 						<label for="popup_vals">Values :</label>
@@ -100,7 +112,7 @@
 					
                     <br>
 					<div class="form-group">
-						{!! Form::submit( 'Update', ['class'=>'btn btn-success']) !!} <a href="{{ url(config('Cms.adminRoute') . '/modules/'.$module->id) }}" class="btn btn-default pull-right">Cancel</a>
+						{!! Form::submit( 'Update', ['class'=>'btn btn-success']) !!} <a href="{{ url(config('cms.adminRoute') . '/modules/'.$module->id) }}" class="btn btn-default pull-right">Cancel</a>
 					</div>
 				{!! Form::close() !!}
 				

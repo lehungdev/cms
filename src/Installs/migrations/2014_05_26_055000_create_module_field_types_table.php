@@ -1,4 +1,11 @@
 <?php
+/**
+ * Migration generated using IdeaGroup
+ * Help: lehung.hut@gmail.com
+ * Cms is open-sourced software licensed under the MIT license.
+ * Developed by: Lehungdev IT Solutions
+ * Developer Website: http://ideagroup.vn
+ */
 
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
@@ -44,6 +51,8 @@ class CreateModuleFieldTypesTable extends Migration
         ModuleFieldTypes::create(["name" => "TextField"]);
         ModuleFieldTypes::create(["name" => "URL"]);
         ModuleFieldTypes::create(["name" => "Files"]);
+        ModuleFieldTypes::create(["name" => "Text"]);
+        ModuleFieldTypes::create(["name" => "LongText"]);
     }
 
     /**

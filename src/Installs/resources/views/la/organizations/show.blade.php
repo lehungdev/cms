@@ -82,11 +82,11 @@
 		</div>
 		<div class="col-md-1 actions">
 			@la_access("Organizations", "edit")
-				<a href="{{ url(config('Cms.adminRoute') . '/organizations/'.$organization->id.'/edit') }}" class="btn btn-xs btn-edit btn-default"><i class="fa fa-pencil"></i></a><br>
+				<a href="{{ url(config('cms.adminRoute') . '/organizations/'.$organization->id.'/edit') }}" class="btn btn-xs btn-edit btn-default"><i class="fa fa-pencil"></i></a><br>
 			@endla_access
 			
 			@la_access("Organizations", "delete")
-				{{ Form::open(['route' => [config('Cms.adminRoute') . '.organizations.destroy', $organization->id], 'method' => 'delete', 'style'=>'display:inline']) }}
+				{{ Form::open(['route' => [config('cms.adminRoute') . '.organizations.destroy', $organization->id], 'method' => 'delete', 'style'=>'display:inline']) }}
 					<button class="btn btn-default btn-delete btn-xs" type="submit"><i class="fa fa-times"></i></button>
 				{{ Form::close() }}
 			@endla_access
@@ -94,7 +94,7 @@
 	</div>
 
 	<ul data-toggle="ajax-tab" class="nav nav-tabs profile" role="tablist">
-		<li class=""><a href="{{ url(config('Cms.adminRoute') . '/organizations') }}" data-toggle="tooltip" data-placement="right" title="Back to Organizations"><i class="fa fa-chevron-left"></i></a></li>
+		<li class=""><a href="{{ url(config('cms.adminRoute') . '/organizations') }}" data-toggle="tooltip" data-placement="right" title="Back to Organizations"><i class="fa fa-chevron-left"></i></a></li>
 		<li class="active"><a role="tab" data-toggle="tab" class="active" href="#tab-general-info" data-target="#tab-info"><i class="fa fa-bars"></i> General Info</a></li>
 		<li class=""><a role="tab" data-toggle="tab" href="#tab-timeline" data-target="#tab-timeline"><i class="fa fa-clock-o"></i> Timeline</a></li>
 	</ul>
@@ -112,7 +112,7 @@
 						@la_display($module, 'phone')
 						@la_display($module, 'website')
 						@la_display($module, 'assigned_to')
-						@la_display($module, 'connect_since')
+						@la_display($module, 'connected_since')
 						@la_display($module, 'address')
 						@la_display($module, 'city')
 						@la_display($module, 'description')

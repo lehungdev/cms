@@ -1,14 +1,14 @@
 @extends("la.layouts.app")
 
 @section("contentheader_title")
-	<a href="{{ url(config('Cms.adminRoute') . '/organizations') }}">Organizations</a> :
+	<a href="{{ url(config('cms.adminRoute') . '/organizations') }}">Organization</a> :
 @endsection
 @section("contentheader_description", $organization->$view_col)
 @section("section", "Organizations")
-@section("section_url", url(config('Cms.adminRoute') . '/organizations'))
+@section("section_url", url(config('cms.adminRoute') . '/organizations'))
 @section("sub_section", "Edit")
 
-@section("htmlheader_title", "Organization Edit : ".$organization->$view_col)
+@section("htmlheader_title", "Organizations Edit : ".$organization->$view_col)
 
 @section("main-content")
 
@@ -29,7 +29,7 @@
 	<div class="box-body">
 		<div class="row">
 			<div class="col-md-8 col-md-offset-2">
-				{!! Form::model($organization, ['route' => [config('Cms.adminRoute') . '.organizations.update', $organization->id ], 'method'=>'PUT', 'id' => 'organization-edit-form']) !!}
+				{!! Form::model($organization, ['route' => [config('cms.adminRoute') . '.organizations.update', $organization->id ], 'method'=>'PUT', 'id' => 'organization-edit-form']) !!}
 					@la_form($module)
 					
 					{{--
@@ -38,7 +38,7 @@
 					@la_input($module, 'phone')
 					@la_input($module, 'website')
 					@la_input($module, 'assigned_to')
-					@la_input($module, 'connect_since')
+					@la_input($module, 'connected_since')
 					@la_input($module, 'address')
 					@la_input($module, 'city')
 					@la_input($module, 'description')
@@ -47,7 +47,7 @@
 					--}}
                     <br>
 					<div class="form-group">
-						{!! Form::submit( 'Update', ['class'=>'btn btn-success']) !!} <a href="{{ url(config('Cms.adminRoute') . '/organizations') }}" class="btn btn-default pull-right">Cancel</a>
+						{!! Form::submit( 'Update', ['class'=>'btn btn-success']) !!} <a href="{{ url(config('cms.adminRoute') . '/organizations') }}" class="btn btn-default pull-right">Cancel</a>
 					</div>
 				{!! Form::close() !!}
 			</div>

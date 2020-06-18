@@ -14,10 +14,10 @@
 	</div>
 	<div class="box-body">
 		<p>Cms Code Editor does not comes inbuilt now. You can get it by following commands.</p>
-		<pre><code>composer require dwij/laeditor</code></pre>
+		<pre><code>composer require lehungdev/laeditor</code></pre>
 		<p>This will download the editor package. Not install editor by following command:</p>
 		<pre><code>php artisan la:editor</code></pre>
-		<p>Now refresh this page or go to <a href="{{ url(config('Cms.adminRoute') . '/laeditor') }}">{{ url(config('Cms.adminRoute') . '/laeditor') }}</a>.</p>
+		<p>Now refresh this page or go to <a href="{{ url(config('cms.adminRoute') . '/laeditor') }}">{{ url(config('cms.adminRoute') . '/laeditor') }}</a>.</p>
 	</div>
 </div>
 

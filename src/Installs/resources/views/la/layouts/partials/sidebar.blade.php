@@ -35,14 +35,14 @@
         <ul class="sidebar-menu">
             <li class="header">MODULES</li>
             <!-- Optionally, you can add icons to the links -->
-            <li><a href="{{ url(config('Cms.adminRoute')) }}"><i class='fa fa-home'></i> <span>Dashboard</span></a></li>
+            <li><a href="{{ url(config('cms.adminRoute')) }}"><i class='fa fa-home'></i> <span>Dashboard</span></a></li>
             <?php
             $menuItems = Lehungdev\Cms\Models\Menu::where("parent", 0)->orderBy('hierarchy', 'asc')->get();
             ?>
             @foreach ($menuItems as $menu)
                 @if($menu->type == "module")
                     <?php
-                    $temp_module_obj = Module::get($menu->name);
+                    $temp_module_obj = Module::get($menu->url);
                     ?>
                     @la_access($temp_module_obj->id)
 						@if(isset($module->id) && $module->name == $menu->name)

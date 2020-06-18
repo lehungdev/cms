@@ -15,11 +15,11 @@
 	<div class="box-body">
 		<div class="row">
 			<div class="col-md-8 col-md-offset-2">
-				{!! Form::model($course, ['route' => [config('Cms.adminRoute') . '.modules.update', $course->id ], 'method'=>'PUT', 'id' => 'course-edit-form']) !!}
+				{!! Form::model($course, ['route' => [config('cms.adminRoute') . '.modules.update', $course->id ], 'method'=>'PUT', 'id' => 'course-edit-form']) !!}
 					
                     <br>
 					<div class="form-group">
-						{!! Form::submit( 'Update', ['class'=>'btn btn-success']) !!} <a href="{{ url(config('Cms.adminRoute') . '/courses') }}" class="btn btn-default pull-right">Cancel</a>
+						{!! Form::submit( 'Update', ['class'=>'btn btn-success']) !!} <a href="{{ url(config('cms.adminRoute') . '/courses') }}" class="btn btn-default pull-right">Cancel</a>
 					</div>
 				{!! Form::close() !!}
 				

@@ -11,21 +11,21 @@
 			</div>
 			<div class="modal-body p0">
 				<div class="row">
-					<div class="col-xs-3 col-sm-3 col-md-3">
+					<div class="col-xs-12 col-sm-12 col-md-12">
 						<div class="fm_folder_selector">
-							<form action="{{ url(config('Cms.adminRoute') . '/upload_files')}}" id="fm_dropzone" enctype="multipart/form-data" method="POST">
+							<form action="{{ url(config('cms.adminRoute') . '/upload_files')}}" id="fm_dropzone" enctype="multipart/form-data" method="POST">
 								{{ csrf_field() }}
 								<div class="dz-message"><i class="fa fa-cloud-upload"></i><br>Drop files here to upload</div>
 								
-								@if(!config('Cms.uploads.private_uploads'))
+								@if(!config('cms.uploads.private_uploads'))
 									<label class="fm_folder_title">Is Public ?</label>
-									{{ Form::checkbox("public", "public", config("Cms.uploads.default_public"), []) }}
+									{{ Form::checkbox("public", "public", config("cms.uploads.default_public"), []) }}
 									<div class="Switch Ajax Round On"><div class="Toggle"></div></div>
 								@endif
 							</form>
 						</div>
 					</div>
-					<div class="col-xs-9 col-sm-9 col-md-9 pl0">
+					<div class="col-xs-12 col-sm-12 col-md-12 pl0_">
 						<div class="nav">
 							<div class="row">
 								<div class="col-xs-2 col-sm-7 col-md-7"></div>

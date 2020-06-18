@@ -1,7 +1,7 @@
 @extends("la.layouts.app")
 
 @section("contentheader_title", "Permissions")
-@section("contentheader_description", "permissions listing")
+@section("contentheader_description", "Permissions listing")
 @section("section", "Permissions")
 @section("sub_section", "Listing")
 @section("htmlheader_title", "Permissions Listing")
@@ -88,7 +88,7 @@ $(function () {
 	$("#example1").DataTable({
 		processing: true,
         serverSide: true,
-        ajax: "{{ url(config('Cms.adminRoute') . '/permission_dt_ajax') }}",
+        ajax: "{{ url(config('cms.adminRoute') . '/permission_dt_ajax') }}",
 		language: {
 			lengthMenu: "_MENU_",
 			search: "_INPUT_",

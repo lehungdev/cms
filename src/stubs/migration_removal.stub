@@ -1,7 +1,10 @@
 <?php
 /**
- * Migration generated using Cms
- * Help: http://Cms.com
+ * Migration generated using IdeaGroup
+ * Help: lehung.hut@gmail.com
+ * Cms is open-sourced software licensed under the MIT license.
+ * Developed by: Lehungdev IT Solutions
+ * Developer Website: http://ideagroup.vn
  */
 
 use Illuminate\Database\Schema\Blueprint;
@@ -10,7 +13,7 @@ use Illuminate\Database\Migrations\Migration;
 class __migration_class_name__ extends Migration
 {
     /**
-     * Run the migrations.
+     * This is Reverse Migration for Deleted Module
      *
      * @return void
      */
@@ -19,7 +22,7 @@ class __migration_class_name__ extends Migration
         // This Module has been deleted.
         // You can remove this file after migrate:reset
         
-        if (Schema::hasTable('__db_table_name__')) {
+        if(Schema::hasTable('__db_table_name__')) {
             Schema::drop('__db_table_name__');
         }
     }
@@ -31,7 +34,7 @@ class __migration_class_name__ extends Migration
      */
     public function down()
     {
-        if (Schema::hasTable('__db_table_name__')) {
+        if(Schema::hasTable('__db_table_name__')) {
             Schema::drop('__db_table_name__');
         }
     }

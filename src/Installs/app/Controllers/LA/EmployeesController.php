@@ -1,7 +1,10 @@
 <?php
 /**
- * Controller generated using Cms
- * Help: http://Cms.com
+ * Controller generated using IdeaGroup
+ * Help: lehung.hut@gmail.com
+ * Cms is open-sourced software licensed under the MIT license.
+ * Developed by: Lehungdev IT Solutions
+ * Developer Website: http://ideagroup.vn
  */
 
 namespace App\Http\Controllers\LA;
@@ -28,21 +31,6 @@ use Log;
 class EmployeesController extends Controller
 {
 	public $show_action = true;
-	public $view_col = 'name';
-	public $listing_cols = ['id', 'name', 'designation', 'mobile', 'email', 'dept'];
-	
-	public function __construct() {
-		
-		// Field Access of Listing Columns
-		if(\Lehungdev\Cms\Helpers\LAHelper::laravel_ver() > 5.3) {
-			$this->middleware(function ($request, $next) {
-				$this->listing_cols = ModuleFields::listingColumnAccessScan('Employees', $this->listing_cols);
-				return $next($request);
-			});
-		} else {
-			$this->listing_cols = ModuleFields::listingColumnAccessScan('Employees', $this->listing_cols);
-		}
-	}
 	
 	/**
 	 * Display a listing of the Employees.
@@ -56,11 +44,11 @@ class EmployeesController extends Controller
 		if(Module::hasAccess($module->id)) {
 			return View('la.employees.index', [
 				'show_actions' => $this->show_action,
-				'listing_cols' => $this->listing_cols,
+				'listing_cols' => Module::getListingColumns('Employees'),
 				'module' => $module
 			]);
 		} else {
-            return redirect(config('Cms.adminRoute')."/");
+            return redirect(config('cms.adminRoute')."/");
         }
 	}
 
@@ -114,17 +102,17 @@ class EmployeesController extends Controller
 			if(env('MAIL_USERNAME') != null && env('MAIL_USERNAME') != "null" && env('MAIL_USERNAME') != "") {
 				// Send mail to User his Password
 				Mail::send('emails.send_login_cred', ['user' => $user, 'password' => $password], function ($m) use ($user) {
-					$m->from('hello@Cms.com', 'Cms');
+					$m->from('hello@cms.com', 'Cms');
 					$m->to($user->email, $user->name)->subject('Cms - Your Login Credentials');
 				});
 			} else {
 				Log::info("User created: username: ".$user->email." Password: ".$password);
 			}
 			
-			return redirect()->route(config('Cms.adminRoute') . '.employees.index');
+			return redirect()->route(config('cms.adminRoute') . '.employees.index');
 			
 		} else {
-			return redirect(config('Cms.adminRoute')."/");
+			return redirect(config('cms.adminRoute')."/");
 		}
 	}
 
@@ -149,7 +137,7 @@ class EmployeesController extends Controller
 				return view('la.employees.show', [
 					'user' => $user,
 					'module' => $module,
-					'view_col' => $this->view_col,
+					'view_col' => $module->view_col,
 					'no_header' => true,
 					'no_padding' => "no-padding"
 				])->with('employee', $employee);
@@ -160,7 +148,7 @@ class EmployeesController extends Controller
 				]);
 			}
 		} else {
-			return redirect(config('Cms.adminRoute')."/");
+			return redirect(config('cms.adminRoute')."/");
 		}
 	}
 
@@ -185,7 +173,7 @@ class EmployeesController extends Controller
 				
 				return view('la.employees.edit', [
 					'module' => $module,
-					'view_col' => $this->view_col,
+					'view_col' => $module->view_col,
 					'user' => $user,
 				])->with('employee', $employee);
 			} else {
@@ -195,7 +183,7 @@ class EmployeesController extends Controller
 				]);
 			}
 		} else {
-			return redirect(config('Cms.adminRoute')."/");
+			return redirect(config('cms.adminRoute')."/");
 		}
 	}
 
@@ -230,10 +218,10 @@ class EmployeesController extends Controller
 			$role = Role::find($request->role);
 			$user->attachRole($role);
 			
-			return redirect()->route(config('Cms.adminRoute') . '.employees.index');
+			return redirect()->route(config('cms.adminRoute') . '.employees.index');
 			
 		} else {
-			return redirect(config('Cms.adminRoute')."/");
+			return redirect(config('cms.adminRoute')."/");
 		}
 	}
 
@@ -249,9 +237,9 @@ class EmployeesController extends Controller
 			Employee::find($id)->delete();
 			
 			// Redirecting to index() method
-			return redirect()->route(config('Cms.adminRoute') . '.employees.index');
+			return redirect()->route(config('cms.adminRoute') . '.employees.index');
 		} else {
-			return redirect(config('Cms.adminRoute')."/");
+			return redirect(config('cms.adminRoute')."/");
 		}
 	}
 	
@@ -260,22 +248,25 @@ class EmployeesController extends Controller
 	 *
 	 * @return
 	 */
-	public function dtajax()
+	public function dtajax(Request $request)
 	{
-		$values = DB::table('employees')->select($this->listing_cols)->whereNull('deleted_at');
+		$module = Module::get('Employees');
+		$listing_cols = Module::getListingColumns('Employees');
+		
+		$values = DB::table('employees')->select($listing_cols)->whereNull('deleted_at');
 		$out = Datatables::of($values)->make();
 		$data = $out->getData();
 
 		$fields_popup = ModuleFields::getModuleFields('Employees');
 		
 		for($i=0; $i < count($data->data); $i++) {
-			for ($j=0; $j < count($this->listing_cols); $j++) { 
-				$col = $this->listing_cols[$j];
+			for ($j=0; $j < count($listing_cols); $j++) { 
+				$col = $listing_cols[$j];
 				if($fields_popup[$col] != null && starts_with($fields_popup[$col]->popup_vals, "@")) {
 					$data->data[$i][$j] = ModuleFields::getFieldValue($fields_popup[$col], $data->data[$i][$j]);
 				}
-				if($col == $this->view_col) {
-					$data->data[$i][$j] = '<a href="'.url(config('Cms.adminRoute') . '/employees/'.$data->data[$i][0]).'">'.$data->data[$i][$j].'</a>';
+				if($col == $module->view_col) {
+					$data->data[$i][$j] = '<a href="'.url(config('cms.adminRoute') . '/employees/'.$data->data[$i][0]).'">'.$data->data[$i][$j].'</a>';
 				}
 				// else if($col == "author") {
 				//    $data->data[$i][$j];
@@ -285,11 +276,11 @@ class EmployeesController extends Controller
 			if($this->show_action) {
 				$output = '';
 				if(Module::hasAccess("Employees", "edit")) {
-					$output .= '<a href="'.url(config('Cms.adminRoute') . '/employees/'.$data->data[$i][0].'/edit').'" class="btn btn-warning btn-xs" style="display:inline;padding:2px 5px 3px 5px;"><i class="fa fa-edit"></i></a>';
+					$output .= '<a href="'.url(config('cms.adminRoute') . '/employees/'.$data->data[$i][0].'/edit').'" class="btn btn-warning btn-xs" style="display:inline;padding:2px 5px 3px 5px;"><i class="fa fa-edit"></i></a>';
 				}
 				
 				if(Module::hasAccess("Employees", "delete")) {
-					$output .= Form::open(['route' => [config('Cms.adminRoute') . '.employees.destroy', $data->data[$i][0]], 'method' => 'delete', 'style'=>'display:inline']);
+					$output .= Form::open(['route' => [config('cms.adminRoute') . '.employees.destroy', $data->data[$i][0]], 'method' => 'delete', 'style'=>'display:inline']);
 					$output .= ' <button class="btn btn-danger btn-xs" type="submit"><i class="fa fa-times"></i></button>';
 					$output .= Form::close();
 				}
@@ -313,7 +304,7 @@ class EmployeesController extends Controller
         ]);
 		
 		if ($validator->fails()) {
-			return \Redirect::to(config('Cms.adminRoute') . '/employees/'.$id)->withErrors($validator);
+			return \Redirect::to(config('cms.adminRoute') . '/employees/'.$id)->withErrors($validator);
 		}
 		
 		$employee = Employee::find($id);
@@ -328,12 +319,12 @@ class EmployeesController extends Controller
 			// Send mail to User his new Password
 			Mail::send('emails.send_login_cred_change', ['user' => $user, 'password' => $request->password], function ($m) use ($user) {
 				$m->from(LAConfigs::getByKey('default_email'), LAConfigs::getByKey('sitename'));
-				$m->to($user->email, $user->name)->subject('Cms - Login Credentials chnaged');
+				$m->to($user->email, $user->name)->subject('Cms - Login Credentials changed');
 			});
 		} else {
 			Log::info("User change_password: username: ".$user->email." Password: ".$request->password);
 		}
 		
-		return redirect(config('Cms.adminRoute') . '/employees/'.$id.'#tab-account-settings');
+		return redirect(config('cms.adminRoute') . '/employees/'.$id.'#tab-account-settings');
 	}
 }

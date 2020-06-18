@@ -1,4 +1,4 @@
-	/* ================== __module_name__ ================== */
-	Route::resource(config('Cms.adminRoute') . '/__db_table_name__', 'LA\__controller_class_name__');
-	Route::get(config('Cms.adminRoute') . '/__singular_var___dt_ajax', 'LA\__controller_class_name__@dtajax');
+    /* ================== __module_name__ ================== */
+    Route::resource(config('cms.adminRoute') . '/__db_table_name__', 'LA\__controller_class_name__');
+    Route::get(config('cms.adminRoute') . '/__singular_var___dt_ajax', 'LA\__controller_class_name__@dtajax');
 });

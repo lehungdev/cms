@@ -1,7 +1,10 @@
 <?php
 /**
- * Controller generated using Cms
- * Help: http://Cms.com
+ * Controller generated using IdeaGroup
+ * Help: lehung.hut@gmail.com
+ * Cms is open-sourced software licensed under the MIT license.
+ * Developed by: Lehungdev IT Solutions
+ * Developer Website: http://ideagroup.vn
  */
 
 namespace App\Http\Controllers\LA;
@@ -22,20 +25,6 @@ use App\User;
 class UsersController extends Controller
 {
 	public $show_action = false;
-	public $view_col = 'name';
-	public $listing_cols = ['id', 'name', 'email', 'type'];
-	
-	public function __construct() {
-		// Field Access of Listing Columns
-		if(\Lehungdev\Cms\Helpers\LAHelper::laravel_ver() > 5.3) {
-			$this->middleware(function ($request, $next) {
-				$this->listing_cols = ModuleFields::listingColumnAccessScan('Users', $this->listing_cols);
-				return $next($request);
-			});
-		} else {
-			$this->listing_cols = ModuleFields::listingColumnAccessScan('Users', $this->listing_cols);
-		}
-	}
 	
 	/**
 	 * Display a listing of the Users.
@@ -49,11 +38,11 @@ class UsersController extends Controller
 		if(Module::hasAccess($module->id)) {
 			return View('la.users.index', [
 				'show_actions' => $this->show_action,
-				'listing_cols' => $this->listing_cols,
+				'listing_cols' => Module::getListingColumns('Users'),
 				'module' => $module
 			]);
 		} else {
-            return redirect(config('Cms.adminRoute')."/");
+            return redirect(config('cms.adminRoute')."/");
         }
 	}
 
@@ -69,9 +58,9 @@ class UsersController extends Controller
 			$user = User::findOrFail($id);
 			if(isset($user->id)) {
 				if($user['type'] == "Employee") {
-					return redirect(config('Cms.adminRoute') . '/employees/'.$user->id);
+					return redirect(config('cms.adminRoute') . '/employees/'.$user->id);
 				} else if($user['type'] == "Client") {
-					return redirect(config('Cms.adminRoute') . '/clients/'.$user->id);
+					return redirect(config('cms.adminRoute') . '/clients/'.$user->id);
 				}
 			} else {
 				return view('errors.404', [
@@ -80,49 +69,38 @@ class UsersController extends Controller
 				]);
 			}
 		} else {
-			return redirect(config('Cms.adminRoute')."/");
+			return redirect(config('cms.adminRoute')."/");
 		}
 	}
-	
+
 	/**
 	 * Datatable Ajax fetch
 	 *
 	 * @return
 	 */
-	public function dtajax()
+	public function dtajax(Request $request)
 	{
-		$values = DB::table('users')->select($this->listing_cols)->whereNull('deleted_at');
+		$module = Module::get('Users');
+		$listing_cols = Module::getListingColumns('Users');
+
+		$values = DB::table('users')->select($listing_cols)->whereNull('deleted_at');
 		$out = Datatables::of($values)->make();
 		$data = $out->getData();
 
 		$fields_popup = ModuleFields::getModuleFields('Users');
 		
 		for($i=0; $i < count($data->data); $i++) {
-			for ($j=0; $j < count($this->listing_cols); $j++) { 
-				$col = $this->listing_cols[$j];
+			for ($j=0; $j < count($listing_cols); $j++) { 
+				$col = $listing_cols[$j];
 				if($fields_popup[$col] != null && starts_with($fields_popup[$col]->popup_vals, "@")) {
 					$data->data[$i][$j] = ModuleFields::getFieldValue($fields_popup[$col], $data->data[$i][$j]);
 				}
-				if($col == $this->view_col) {
-					$data->data[$i][$j] = '<a href="'.url(config('Cms.adminRoute') . '/users/'.$data->data[$i][0]).'">'.$data->data[$i][$j].'</a>';
+				if($col == $module->view_col) {
+					$data->data[$i][$j] = '<a href="'.url(config('cms.adminRoute') . '/users/'.$data->data[$i][0]).'">'.$data->data[$i][$j].'</a>';
 				}
 				// else if($col == "author") {
 				//    $data->data[$i][$j];
 				// }
-			}
-			
-			if($this->show_action) {
-				$output = '';
-				if(Module::hasAccess("Users", "edit")) {
-					$output .= '<a href="'.url(config('Cms.adminRoute') . '/users/'.$data->data[$i][0].'/edit').'" class="btn btn-warning btn-xs" style="display:inline;padding:2px 5px 3px 5px;"><i class="fa fa-edit"></i></a>';
-				}
-				
-				if(Module::hasAccess("Users", "delete")) {
-					$output .= Form::open(['route' => [config('Cms.adminRoute') . '.users.destroy', $data->data[$i][0]], 'method' => 'delete', 'style'=>'display:inline']);
-					$output .= ' <button class="btn btn-danger btn-xs" type="submit"><i class="fa fa-times"></i></button>';
-					$output .= Form::close();
-				}
-				$data->data[$i][] = (string)$output;
 			}
 		}
 		$out->setData($data);

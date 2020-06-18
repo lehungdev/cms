@@ -1,7 +1,7 @@
 @extends("la.layouts.app")
 
 @section("contentheader_title", "Users")
-@section("contentheader_description", "users listing")
+@section("contentheader_description", "Users listing")
 @section("section", "Users")
 @section("sub_section", "Listing")
 @section("htmlheader_title", "Users Listing")
@@ -56,7 +56,7 @@ $(function () {
 	$("#example1").DataTable({
 		processing: true,
         serverSide: true,
-        ajax: "{{ url(config('Cms.adminRoute') . '/user_dt_ajax') }}",
+        ajax: "{{ url(config('cms.adminRoute') . '/user_dt_ajax') }}",
 		language: {
 			lengthMenu: "_MENU_",
 			search: "_INPUT_",
