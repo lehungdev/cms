@@ -7,7 +7,7 @@
         "illuminate/support": "7.*",
         "laravelcollective/html": "^5.2|^5.1",
         "illuminate/container": "7.*",
-        "yajra/laravel-datatables-oracle": "9.*",
+        "yajra/laravel-datatables-oracle": "9.10.2",
         "creativeorange/gravatar": "^1.0.14",
         "doctrine/dbal": "~2.10.2",
         "zizaco/entrust": "1.9.1",
