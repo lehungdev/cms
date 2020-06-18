@@ -4,9 +4,9 @@
     "keywords": ["php", "laravel", "crm", "admin", "cms", "administrator"],
     "license": "MIT",
     "require": {
-        "illuminate/support": "^7.*",
+        "illuminate/support": "7.*",
         "laravelcollective/html": "^5.2|^5.1",
-        "illuminate/container": "^7.*",
+        "illuminate/container": "7.*",
         "yajra/laravel-datatables-oracle": "9.*",
         "creativeorange/gravatar": "^1.0.14",
         "doctrine/dbal": "~2.10.2",
