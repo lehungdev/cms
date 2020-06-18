@@ -8,7 +8,7 @@ namespace App\Http\Controllers\LA;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Lehungdev/Cms\Models\LAConfigs;
+use Lehungdev\Cms\Models\LAConfigs;
 
 class LAConfigController extends Controller
 {

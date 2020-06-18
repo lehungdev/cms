@@ -1,6 +1,6 @@
 <?php
 
-namespace Lehungdev/Cms\Models;
+namespace Lehungdev\Cms\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Schema;
@@ -8,7 +8,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Exception;
 use Log;
 use DB;
-use Lehungdev/Cms\Helpers\LAHelper;
+use Lehungdev\Cms\Helpers\LAHelper;
 
 class LAConfigs extends Model
 {   

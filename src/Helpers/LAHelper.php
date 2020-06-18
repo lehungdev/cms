@@ -1,11 +1,11 @@
 <?php
 
-namespace Lehungdev/Cms\Helpers;
+namespace Lehungdev\Cms\Helpers;
 
 use DB;
 use Log;
 
-use Lehungdev/Cms\Models\Module;
+use Lehungdev\Cms\Models\Module;
 
 class LAHelper
 {
@@ -265,7 +265,7 @@ class LAHelper
 			<div class="dd-handle dd3-handle"></div>
 			<div class="dd3-content"><i class="fa '.$menu->icon.'"></i> '.$menu->name.' '.$editing.'</div>';
 		
-		$childrens = \Lehungdev/Cms\Models\Menu::where("parent", $menu->id)->orderBy('hierarchy', 'asc')->get();
+		$childrens = \Lehungdev\Cms\Models\Menu::where("parent", $menu->id)->orderBy('hierarchy', 'asc')->get();
 		
 		if(count($childrens) > 0) {
 			$str .= '<ol class="dd-list">';
@@ -280,7 +280,7 @@ class LAHelper
 
 	// LAHelper::print_menu($menu)
 	public static function print_menu($menu, $active = false) {
-		$childrens = \Lehungdev/Cms\Models\Menu::where("parent", $menu->id)->orderBy('hierarchy', 'asc')->get();
+		$childrens = \Lehungdev\Cms\Models\Menu::where("parent", $menu->id)->orderBy('hierarchy', 'asc')->get();
 
 		$treeview = "";
 		$subviewSign = "";
@@ -308,7 +308,7 @@ class LAHelper
 
 	// LAHelper::print_menu_topnav($menu)
 	public static function print_menu_topnav($menu, $active = false) {
-		$childrens = \Lehungdev/Cms\Models\Menu::where("parent", $menu->id)->orderBy('hierarchy', 'asc')->get();
+		$childrens = \Lehungdev\Cms\Models\Menu::where("parent", $menu->id)->orderBy('hierarchy', 'asc')->get();
 
 		$treeview = "";
 		$treeview2 = "";

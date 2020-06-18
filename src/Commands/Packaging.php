@@ -4,11 +4,11 @@
  * Help: http://laraadmin.com
  */
 
-namespace Lehungdev/Cms\Commands;
+namespace Lehungdev\Cms\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
-use Lehungdev/Cms\Helpers\LAHelper;
+use Lehungdev\Cms\Helpers\LAHelper;
 
 class Packaging extends Command
 {

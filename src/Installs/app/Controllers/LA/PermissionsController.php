@@ -14,9 +14,9 @@ use DB;
 use Validator;
 use Datatables;
 use Collective\Html\FormFacade as Form;
-use Lehungdev/Cms\Models\Module;
-use Lehungdev/Cms\Models\ModuleFields;
-use Lehungdev/Cms\Helpers\LAHelper;
+use Lehungdev\Cms\Models\Module;
+use Lehungdev\Cms\Models\ModuleFields;
+use Lehungdev\Cms\Helpers\LAHelper;
 use Trebol\Entrust\EntrustFacade as Entrust;
 
 use App\Permission;
@@ -30,7 +30,7 @@ class PermissionsController extends Controller
 
 	public function __construct() {
 		// Field Access of Listing Columns
-		if(\Lehungdev/Cms\Helpers\LAHelper::laravel_ver() > 5.3) {
+		if(\Lehungdev\Cms\Helpers\LAHelper::laravel_ver() > 5.3) {
 			$this->middleware(function ($request, $next) {
 				$this->listing_cols = ModuleFields::listingColumnAccessScan('Permissions', $this->listing_cols);
 				return $next($request);

@@ -1,10 +1,10 @@
 <?php
-namespace Lehungdev/Cms;
+namespace Lehungdev\Cms;
 
 use Schema;
 use Collective\Html\FormFacade as Form;
-use Lehungdev/Cms\Models\Module;
-use Lehungdev/Cms\Models\ModuleFieldTypes;
+use Lehungdev\Cms\Models\Module;
+use Lehungdev\Cms\Models\ModuleFieldTypes;
 
 class LAFormMaker
 {

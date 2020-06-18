@@ -2,11 +2,11 @@
 
 use Illuminate\Database\Seeder;
 
-use Lehungdev/Cms\Models\Module;
-use Lehungdev/Cms\Models\ModuleFields;
-use Lehungdev/Cms\Models\ModuleFieldTypes;
-use Lehungdev/Cms\Models\Menu;
-use Lehungdev/Cms\Models\LAConfigs;
+use Lehungdev\Cms\Models\Module;
+use Lehungdev\Cms\Models\ModuleFields;
+use Lehungdev\Cms\Models\ModuleFieldTypes;
+use Lehungdev\Cms\Models\Menu;
+use Lehungdev\Cms\Models\LAConfigs;
 
 use App\Role;
 use App\Permission;

@@ -1,14 +1,14 @@
 <?php
 
-namespace Lehungdev/Cms\Commands;
+namespace Lehungdev\Cms\Commands;
 
 use Config;
 use Artisan;
 use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
-use Lehungdev/Cms\Models\Module;
-use Lehungdev/Cms\CodeGenerator;
+use Lehungdev\Cms\Models\Module;
+use Lehungdev\Cms\CodeGenerator;
 
 class Crud extends Command
 {

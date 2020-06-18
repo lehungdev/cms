@@ -4,12 +4,12 @@
  * Help: http://laraadmin.com
  */
 
-namespace Lehungdev/Cms\Commands;
+namespace Lehungdev\Cms\Commands;
 
 use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
-use Lehungdev/Cms\Helpers\LAHelper;
+use Lehungdev\Cms\Helpers\LAHelper;
 use Eloquent;
 use DB;
 

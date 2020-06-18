@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
-use Lehungdev/Cms\Models\ModuleFieldTypes;
+use Lehungdev\Cms\Models\ModuleFieldTypes;
 
 class CreateModuleFieldTypesTable extends Migration
 {

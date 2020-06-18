@@ -1,7 +1,7 @@
 @extends("la.layouts.app")
 
 <?php
-use Lehungdev/Cms\Models\Module;
+use Lehungdev\Cms\Models\Module;
 ?>
 
 @section("contentheader_title", "Modules")

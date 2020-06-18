@@ -3,7 +3,7 @@
 @section('htmlheader_title', 'Module View')
 
 <?php
-use Lehungdev/Cms\Models\Module;
+use Lehungdev\Cms\Models\Module;
 ?>
 
 @section('main-content')

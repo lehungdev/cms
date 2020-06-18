@@ -1,10 +1,10 @@
 <?php
 
-namespace Lehungdev/Cms\Commands;
+namespace Lehungdev\Cms\Commands;
 
 use Illuminate\Console\Command;
 
-use Lehungdev/Cms\CodeGenerator;
+use Lehungdev\Cms\CodeGenerator;
 
 class Migration extends Command
 {

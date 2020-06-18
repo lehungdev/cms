@@ -1,13 +1,13 @@
 <?php
 
-namespace Lehungdev/Cms\Models;
+namespace Lehungdev\Cms\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Schema;
 use Log;
 use DB;
 
-use Lehungdev/Cms\Models\Module;
+use Lehungdev\Cms\Models\Module;
 
 class ModuleFields extends Model
 {

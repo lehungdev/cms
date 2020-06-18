@@ -1,6 +1,6 @@
 <?php
 
-namespace Lehungdev/Cms\Models;
+namespace Lehungdev\Cms\Models;
 
 use Illuminate\Database\Eloquent\Model;
 

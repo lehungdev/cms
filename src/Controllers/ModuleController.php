@@ -4,20 +4,20 @@
  * Help: http://laraadmin.com
  */
 
-namespace Lehungdev/Cms\Controllers;
+namespace Lehungdev\Cms\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use DB;
-use Lehungdev/Cms\Helpers\LAHelper;
-use Lehungdev/Cms\Models\Module;
-use Lehungdev/Cms\Models\ModuleFields;
-use Lehungdev/Cms\Models\ModuleFieldTypes;
-use Lehungdev/Cms\CodeGenerator;
+use Lehungdev\Cms\Helpers\LAHelper;
+use Lehungdev\Cms\Models\Module;
+use Lehungdev\Cms\Models\ModuleFields;
+use Lehungdev\Cms\Models\ModuleFieldTypes;
+use Lehungdev\Cms\CodeGenerator;
 use App\Role;
 use Schema;
-use Lehungdev/Cms\Models\Menu;
+use Lehungdev\Cms\Models\Menu;
 
 class ModuleController extends Controller
 {
