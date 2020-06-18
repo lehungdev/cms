@@ -1,7 +1,7 @@
 <?php
 /**
- * Controller generated using LaraAdmin
- * Help: http://laraadmin.com
+ * Controller generated using Cms
+ * Help: http://Cms.com
  */
 
 namespace Lehungdev\Cms\Controllers;
@@ -61,7 +61,7 @@ class ModuleController extends Controller
 	{
 		$module_id = Module::generateBase($request->name, $request->icon);
 		
-		return redirect()->route(config('laraadmin.adminRoute') . '.modules.show', [$module_id]);
+		return redirect()->route(config('Cms.adminRoute') . '.modules.show', [$module_id]);
 	}
 
 	/**
@@ -204,7 +204,7 @@ class ModuleController extends Controller
 		$module->delete();
 		
 		$modules = Module::all();
-		return redirect()->route(config('laraadmin.adminRoute') . '.modules.index', ['modules' => $modules]);
+		return redirect()->route(config('Cms.adminRoute') . '.modules.index', ['modules' => $modules]);
 	}
 	
 	/**
@@ -338,7 +338,7 @@ class ModuleController extends Controller
 		$module->view_col=$column_name;
 		$module->save();
 
-		return redirect()->route(config('laraadmin.adminRoute') . '.modules.show', [$module_id]);
+		return redirect()->route(config('Cms.adminRoute') . '.modules.show', [$module_id]);
 	}
 	
 	public function save_role_module_permissions(Request $request, $id)
@@ -412,7 +412,7 @@ class ModuleController extends Controller
 				}
 			}
 		}
-        return redirect(config('laraadmin.adminRoute') . '/modules/'.$id."#access");
+        return redirect(config('Cms.adminRoute') . '/modules/'.$id."#access");
 	}
 	
 	public function save_module_field_sort(Request $request, $id)

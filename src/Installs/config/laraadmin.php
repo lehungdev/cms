@@ -1,7 +1,7 @@
 <?php
 /**
- * Config generated using LaraAdmin
- * Help: http://laraadmin.com
+ * Config generated using Cms
+ * Help: http://Cms.com
  */
 
 return [

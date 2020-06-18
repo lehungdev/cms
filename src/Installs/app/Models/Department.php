@@ -1,7 +1,7 @@
 <?php
 /**
- * Model generated using LaraAdmin
- * Help: http://laraadmin.com
+ * Model generated using Cms
+ * Help: http://Cms.com
  */
 
 namespace App\Models;

@@ -4,7 +4,7 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-class LaraAdminTest extends TestCase
+class CmsTest extends TestCase
 {
 	use DatabaseMigrations;
 
@@ -37,7 +37,7 @@ class LaraAdminTest extends TestCase
     public function testExample()
     {
 		$this->visit('/')
-             ->see('LaraAdmin')
+             ->see('Cms')
 			 ->see('Taylor Otwell');
     }
 

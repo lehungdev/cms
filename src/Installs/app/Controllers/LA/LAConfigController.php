@@ -1,7 +1,7 @@
 <?php
 /**
- * Controller generated using LaraAdmin
- * Help: http://laraadmin.com
+ * Controller generated using Cms
+ * Help: http://Cms.com
  */
 
 namespace App\Http\Controllers\LA;
@@ -65,6 +65,6 @@ class LAConfigController extends Controller
 			LAConfigs::where('key', $key)->update(['value' => $value]);
 		}
 		
-		return redirect(config('laraadmin.adminRoute')."/la_configs");
+		return redirect(config('Cms.adminRoute')."/la_configs");
 	}	
 }

@@ -35,7 +35,7 @@
         <ul class="sidebar-menu">
             <li class="header">MODULES</li>
             <!-- Optionally, you can add icons to the links -->
-            <li><a href="{{ url(config('laraadmin.adminRoute')) }}"><i class='fa fa-home'></i> <span>Dashboard</span></a></li>
+            <li><a href="{{ url(config('Cms.adminRoute')) }}"><i class='fa fa-home'></i> <span>Dashboard</span></a></li>
             <?php
             $menuItems = Lehungdev\Cms\Models\Menu::where("parent", 0)->orderBy('hierarchy', 'asc')->get();
             ?>

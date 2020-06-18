@@ -18,17 +18,17 @@ class LAProvider extends ServiceProvider
      */
     public function boot()
     {
-        // @mkdir(base_path('resources/laraadmin'));
-        // @mkdir(base_path('database/migrations/laraadmin'));
+        // @mkdir(base_path('resources/Cms'));
+        // @mkdir(base_path('database/migrations/Cms'));
         /*
         $this->publishes([
-            __DIR__.'/Templates' => base_path('resources/laraadmin'),
-            __DIR__.'/config.php' => base_path('config/laraadmin.php'),
-            __DIR__.'/Migrations' => base_path('database/migrations/laraadmin')
+            __DIR__.'/Templates' => base_path('resources/Cms'),
+            __DIR__.'/config.php' => base_path('config/Cms.php'),
+            __DIR__.'/Migrations' => base_path('database/migrations/Cms')
         ]);
         */
-        //echo "Laraadmin Migrations started...";
-        // Artisan::call('migrate', ['--path' => "vendor/dwij/laraadmin/src/Migrations/"]);
+        //echo "Cms Migrations started...";
+        // Artisan::call('migrate', ['--path' => "vendor/dwij/Cms/src/Migrations/"]);
         //echo "Migrations completed !!!.";
         // Execute by php artisan vendor:publish --provider="Lehungdev\Cms\LAProvider"
 
@@ -102,19 +102,19 @@ class LAProvider extends ServiceProvider
         // For Gravatar User Profile Pics
         $loader->alias('Gravatar', \Creativeorange\Gravatar\Facades\Gravatar::class);
 
-        // For LaraAdmin Code Generation
+        // For Cms Code Generation
         $loader->alias('CodeGenerator', \Lehungdev\Cms\CodeGenerator::class);
 
-        // For LaraAdmin Form Helper
+        // For Cms Form Helper
         $loader->alias('LAFormMaker', \Lehungdev\Cms\LAFormMaker::class);
 
-        // For LaraAdmin Helper
+        // For Cms Helper
         $loader->alias('LAHelper', \Lehungdev\Cms\Helpers\LAHelper::class);
 
-        // LaraAdmin Module Model
+        // Cms Module Model
         $loader->alias('Module', \Lehungdev\Cms\Models\Module::class);
 
-		// For LaraAdmin Configuration Model
+		// For Cms Configuration Model
 		$loader->alias('LAConfigs', \Lehungdev\Cms\Models\LAConfigs::class);
 
         // For Entrust

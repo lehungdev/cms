@@ -1,7 +1,7 @@
 <?php
 /**
- * Migration generated using LaraAdmin
- * Help: http://laraadmin.com
+ * Migration generated using Cms
+ * Help: http://Cms.com
  */
 
 use Illuminate\Support\Facades\Schema;

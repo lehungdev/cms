@@ -167,7 +167,7 @@ class CodeGenerator
         }
 
         // Old Method to add Menu
-        // $menu = '<li><a href="{{ url(config("laraadmin.adminRoute") . '."'".'/'.$config->dbTableName."'".') }}"><i class="fa fa-cube"></i> <span>'.$config->moduleName.'</span></a></li>'."\n".'            <!-- LAMenus -->';
+        // $menu = '<li><a href="{{ url(config("Cms.adminRoute") . '."'".'/'.$config->dbTableName."'".') }}"><i class="fa fa-cube"></i> <span>'.$config->moduleName.'</span></a></li>'."\n".'            <!-- LAMenus -->';
         // $md = file_get_contents(base_path('resources/views/la/layouts/partials/sidebar.blade.php'));
         // $md = str_replace("<!-- LAMenus -->", $menu, $md);
         // file_put_contents(base_path('resources/views/la/layouts/partials/sidebar.blade.php'), $md);

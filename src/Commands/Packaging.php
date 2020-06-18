@@ -1,7 +1,7 @@
 <?php
 /**
- * Command for LaraAdmin Package Development
- * Help: http://laraadmin.com
+ * Command for Cms Package Development
+ * Help: http://Cms.com
  */
 
 namespace Lehungdev\Cms\Commands;
@@ -24,7 +24,7 @@ class Packaging extends Command
      *
      * @var string
      */
-    protected $description = '[Developer Only] - Copy LaraAdmin-Dev files to package: "dwij/laraadmin"';
+    protected $description = '[Developer Only] - Copy Cms-Dev files to package: "dwij/Cms"';
     
     protected $from;
     protected $to;
@@ -41,7 +41,7 @@ class Packaging extends Command
         $this->info('Exporting started...');
         
         $from = base_path();
-        $to = base_path('vendor/dwij/laraadmin/src/Installs');
+        $to = base_path('vendor/dwij/Cms/src/Installs');
         
         $this->info('from: '.$from." to: ".$to);
         
@@ -79,10 +79,10 @@ class Packaging extends Command
         
         // Config
         $this->line('Exporting Config...');
-        $this->copyFile($from."/config/laraadmin.php", $to."/config/laraadmin.php");
+        $this->copyFile($from."/config/Cms.php", $to."/config/Cms.php");
         
         // la-assets
-        $this->line('Exporting LaraAdmin Assets...');
+        $this->line('Exporting Cms Assets...');
         $this->replaceFolder($from."/public/la-assets", $to."/la-assets");
         // Use "git config core.fileMode false" for ignoring file permissions
         

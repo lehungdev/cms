@@ -126,7 +126,7 @@ $(function () {
 		var jsonData = $('#menu-nestable').nestable('serialize');
 		// console.log(jsonData);
 		$.ajax({
-			url: "{{ url(config('laraadmin.adminRoute') . '/la_menus/update_hierarchy') }}",
+			url: "{{ url(config('Cms.adminRoute') . '/la_menus/update_hierarchy') }}",
 			method: 'POST',
 			data: {
 				jsonData: jsonData,
@@ -162,7 +162,7 @@ $(function () {
 	$("#tab-modules .addModuleMenu").on("click", function() {
 		var module_id = $(this).attr("module_id");
 		$.ajax({
-			url: "{{ url(config('laraadmin.adminRoute') . '/la_menus') }}",
+			url: "{{ url(config('Cms.adminRoute') . '/la_menus') }}",
 			method: 'POST',
 			data: {
 				type: 'module',

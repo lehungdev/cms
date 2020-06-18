@@ -10,13 +10,13 @@
     <meta property="og:type" content="website" />
     <meta property="og:description" content="{{ LAConfigs::getByKey('site_description') }}" />
     
-    <meta property="og:url" content="http://laraadmin.com/" />
-    <meta property="og:sitename" content="laraAdmin" />
-	<meta property="og:image" content="http://demo.adminlte.acacha.org/img/LaraAdmin-600x600.jpg" />
+    <meta property="og:url" content="http://Cms.com/" />
+    <meta property="og:sitename" content="Cms" />
+	<meta property="og:image" content="http://demo.adminlte.acacha.org/img/Cms-600x600.jpg" />
     
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@laraadmin" />
-    <meta name="twitter:creator" content="@laraadmin" />
+    <meta name="twitter:site" content="@Cms" />
+    <meta name="twitter:creator" content="@Cms" />
     
     <title>{{ LAConfigs::getByKey('sitename') }}</title>
     
@@ -61,7 +61,7 @@
                     <li><a href="{{ url('/login') }}">Login</a></li>
                     <!--<li><a href="{{ url('/register') }}">Register</a></li>-->
                 @else
-                    <li><a href="{{ url(config('laraadmin.adminRoute')) }}">{{ Auth::user()->name }}</a></li>
+                    <li><a href="{{ url(config('Cms.adminRoute')) }}">{{ Auth::user()->name }}</a></li>
                 @endif
             </ul>
         </div><!--/.nav-collapse -->
@@ -135,16 +135,16 @@
             </div>
 
             <div class="col-lg-7">
-				<h3 class="feature-title">What is LaraAdmin ?</h3><br>
+				<h3 class="feature-title">What is Cms ?</h3><br>
 				<ol class="features">
 					<li><strong>CMS</strong> (Content Management System) &#8211; Manages Modules &amp; their Data</li>
 					<li>Backend <strong>Admin Panel</strong> &#8211; Data can be used in front end applications with ease.</li>
 					<li>A probable <strong>CRM</strong> System &#8211; Can be evolved into a CRM system like <a target="_blank" href="https://www.sugarcrm.com">SugarCRM</a></li>
 				</ol><br>
 
-				<h3 class="feature-title">Why LaraAdmin ?</h3><br>
+				<h3 class="feature-title">Why Cms ?</h3><br>
                 <ol class="features">
-					<li><strong>Philosophy:</strong> Inspired by SugarCRM &amp; based on Advanced <strong>Data Types</strong> like Image, HTML, File, Dropdown, TagInput which makes developers job easy. See more in <a target="_blank" href="http://laraadmin.com/features">features</a></li>
+					<li><strong>Philosophy:</strong> Inspired by SugarCRM &amp; based on Advanced <strong>Data Types</strong> like Image, HTML, File, Dropdown, TagInput which makes developers job easy. See more in <a target="_blank" href="http://Cms.com/features">features</a></li>
 					<li>Superior <strong>CRUD generation</strong> for Modules which generates Migration, Controller, Model and Views with single artisan command and integrates with Routes as as well.</li>
 					<li><strong>Form Maker</strong> helper is provided for generating entire form with single function call with module name as single parameter. It also gives you freedom to customise form for every field by providing method to generate single field with parameters for customisations.</li>
 					<li><b>Upload Manager </b>manages project files &amp; images which are integrated with your Module fields.</li>
@@ -168,8 +168,8 @@
                 Opp. PICT College,<br/>
                 Katraj, Pune, India - 411046
             </p>
-			<div class="contact-link"><i class="fa fa-envelope-o"></i> <a href="mailto:hello@laraadmin.com">hello@laraadmin.com</a></div>
-			<div class="contact-link"><i class="fa fa-cube"></i> <a href="http://laraadmin.com">laraadmin.com</a></div>
+			<div class="contact-link"><i class="fa fa-envelope-o"></i> <a href="mailto:hello@Cms.com">hello@Cms.com</a></div>
+			<div class="contact-link"><i class="fa fa-cube"></i> <a href="http://Cms.com">Cms.com</a></div>
 			<div class="contact-link"><i class="fa fa-building"></i> <a href="http://dwijitsolutions.com">dwijitsolutions.com</a></div>
         </div>
 

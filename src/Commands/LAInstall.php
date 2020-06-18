@@ -1,7 +1,7 @@
 <?php
 /**
- * Command for LaraAdmin Installation
- * Help: http://laraadmin.com
+ * Command for Cms Installation
+ * Help: http://Cms.com
  */
 
 namespace Lehungdev\Cms\Commands;
@@ -28,7 +28,7 @@ class LAInstall extends Command
 	 *
 	 * @var string
 	 */
-	protected $description = 'Install LaraAdmin Package. Generate whole structure for /admin.';
+	protected $description = 'Install Cms Package. Generate whole structure for /admin.';
 
 	protected $from;
 	protected $to;
@@ -43,9 +43,9 @@ class LAInstall extends Command
 	public function handle()
 	{
 		try {
-			$this->info('LaraAdmin installation started...');
+			$this->info('Cms installation started...');
 
-			$from = base_path('vendor/dwij/laraadmin/src/Installs');
+			$from = base_path('vendor/dwij/Cms/src/Installs');
 			$to = base_path();
 
 			$this->info('from: '.$from." to: ".$to);
@@ -59,7 +59,7 @@ class LAInstall extends Command
 					$db_data['host'] = $this->ask('Database Host', '127.0.0.1');
 					$db_data['port'] = $this->ask('Database Port', '3306');
 				}
-				$db_data['db'] = $this->ask('Database Name', 'laraadmin1');
+				$db_data['db'] = $this->ask('Database Name', 'Cms1');
 				$db_data['dbuser'] = $this->ask('Database User', 'root');
 				$dbpass = $this->ask('Database Password', false);
 
@@ -127,7 +127,7 @@ class LAInstall extends Command
 
 				// Config
 				$this->line('Generating Config...');
-				$this->copyFile($from."/config/laraadmin.php", $to."/config/laraadmin.php");
+				$this->copyFile($from."/config/Cms.php", $to."/config/Cms.php");
 
 				// Models
 				$this->line('Generating Models...');
@@ -154,11 +154,11 @@ class LAInstall extends Command
 				$this->line("\nDefault admin url route is /admin");
 				if ($this->confirm('Would you like to customize this url ?', false)) {
 					$custom_admin_route = $this->ask('Custom admin route:', 'admin');
-					$laconfigfile =  $this->openFile($to."/config/laraadmin.php");
-					$arline = LAHelper::getLineWithString($to."/config/laraadmin.php", "'adminRoute' => 'admin',");
+					$laconfigfile =  $this->openFile($to."/config/Cms.php");
+					$arline = LAHelper::getLineWithString($to."/config/Cms.php", "'adminRoute' => 'admin',");
 					$laconfigfile = str_replace($arline, "    'adminRoute' => '" . $custom_admin_route . "',", $laconfigfile);
-					file_put_contents($to."/config/laraadmin.php", $laconfigfile);
-					config(['laraadmin.adminRoute' => $custom_admin_route]);
+					file_put_contents($to."/config/Cms.php", $laconfigfile);
+					config(['Cms.adminRoute' => $custom_admin_route]);
 				}
 				*/
 
@@ -174,7 +174,7 @@ class LAInstall extends Command
 				}
 
 				// la-assets
-				$this->line('Generating LaraAdmin Public Assets...');
+				$this->line('Generating Cms Public Assets...');
 				$this->replaceFolder($from."/la-assets", $to."/public/la-assets");
 				// Use "git config core.fileMode false" for ignoring file permissions
 
@@ -221,7 +221,7 @@ class LAInstall extends Command
 				$this->call('migrate:refresh');
 				// $this->call('migrate:refresh', ['--seed']);
 
-				// $this->call('db:seed', ['--class' => 'LaraAdminSeeder']);
+				// $this->call('db:seed', ['--class' => 'CmsSeeder']);
 
 				// $this->line('Running seeds...');
 				// $this->info(exec('composer dump-autoload'));
@@ -244,7 +244,7 @@ class LAInstall extends Command
 
 				// Routes
 				$this->line('Appending routes...');
-				//if(!$this->fileContains($to."/app/Http/routes.php", "laraadmin.adminRoute")) {
+				//if(!$this->fileContains($to."/app/Http/routes.php", "Cms.adminRoute")) {
 				if(LAHelper::laravel_ver() > 5.3) {
 					if(LAHelper::getLineWithString($to."/routes/web.php", "require __DIR__.'/admin_routes.php';") == -1) {
 						$this->appendFile($from."/app/routes.php", $to."/routes/web.php");
@@ -314,8 +314,8 @@ class LAInstall extends Command
 				}
 				$role = \App\Role::whereName('SUPER_ADMIN')->first();
 				$user->attachRole($role);
-				$this->info("\nLaraAdmin successfully installed.");
-				$this->info("You can now login from yourdomain.com/".config('laraadmin.adminRoute')." !!!\n");
+				$this->info("\nCms successfully installed.");
+				$this->info("You can now login from yourdomain.com/".config('Cms.adminRoute')." !!!\n");
 
 			} else {
 				$this->error("Installation aborted. Please try again after backup / git. Thank you...");

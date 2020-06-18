@@ -56,7 +56,7 @@ class LAFormMaker
 			if($unique && !isset($params['unique'])) {
 				$params['data-rule-unique'] = "true";
 				$params['field_id'] = $module->fields[$field_name]['id'];
-				$params['adminRoute'] = config('laraadmin.adminRoute');
+				$params['adminRoute'] = config('Cms.adminRoute');
 				if(isset($row)) {
 					$params['isEdit'] = true;
 					$params['row_id'] = $row->id;
@@ -720,7 +720,7 @@ class LAFormMaker
 						if($value != 0) {
 							$moduleVal = Module::getByTable(str_replace("@", "", $fieldObj['popup_vals']));
 							if(isset($moduleVal->id)) {
-								$value = "<a href='".url(config("laraadmin.adminRoute")."/".$moduleVal->name_db."/".$value)."' class='label label-primary'>".$values[$value]."</a> ";
+								$value = "<a href='".url(config("Cms.adminRoute")."/".$moduleVal->name_db."/".$value)."' class='label label-primary'>".$values[$value]."</a> ";
 							} else {
 								$value = "<a class='label label-primary'>".$values[$value]."</a> ";
 							}
@@ -800,7 +800,7 @@ class LAFormMaker
 							$valueSel = json_decode($value);
 							foreach ($values as $key => $val) {
 								if(in_array($key, $valueSel)) {
-									$valueOut .= "<a href='".url(config("laraadmin.adminRoute")."/".$moduleVal->name_db."/".$key)."' class='label label-primary'>".$val."</a> ";
+									$valueOut .= "<a href='".url(config("Cms.adminRoute")."/".$moduleVal->name_db."/".$key)."' class='label label-primary'>".$val."</a> ";
 								}
 							}
 						} else {
@@ -835,7 +835,7 @@ class LAFormMaker
 							$valueSel = json_decode($value);
 							foreach ($values as $key => $val) {
 								if(in_array($key, $valueSel)) {
-									$valueOut .= "<a href='".url(config("laraadmin.adminRoute")."/".$moduleVal->name_db."/".$key)."' class='label label-primary'>".$val."</a> ";
+									$valueOut .= "<a href='".url(config("Cms.adminRoute")."/".$moduleVal->name_db."/".$key)."' class='label label-primary'>".$val."</a> ";
 								}
 							}
 						} else {

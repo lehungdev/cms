@@ -1,7 +1,7 @@
 <?php
 /**
- * Controller generated using LaraAdmin
- * Help: http://laraadmin.com
+ * Controller generated using Cms
+ * Help: http://Cms.com
  */
 
 namespace App\Http\Controllers\LA;
@@ -60,7 +60,7 @@ class EmployeesController extends Controller
 				'module' => $module
 			]);
 		} else {
-            return redirect(config('laraadmin.adminRoute')."/");
+            return redirect(config('Cms.adminRoute')."/");
         }
 	}
 
@@ -114,17 +114,17 @@ class EmployeesController extends Controller
 			if(env('MAIL_USERNAME') != null && env('MAIL_USERNAME') != "null" && env('MAIL_USERNAME') != "") {
 				// Send mail to User his Password
 				Mail::send('emails.send_login_cred', ['user' => $user, 'password' => $password], function ($m) use ($user) {
-					$m->from('hello@laraadmin.com', 'LaraAdmin');
-					$m->to($user->email, $user->name)->subject('LaraAdmin - Your Login Credentials');
+					$m->from('hello@Cms.com', 'Cms');
+					$m->to($user->email, $user->name)->subject('Cms - Your Login Credentials');
 				});
 			} else {
 				Log::info("User created: username: ".$user->email." Password: ".$password);
 			}
 			
-			return redirect()->route(config('laraadmin.adminRoute') . '.employees.index');
+			return redirect()->route(config('Cms.adminRoute') . '.employees.index');
 			
 		} else {
-			return redirect(config('laraadmin.adminRoute')."/");
+			return redirect(config('Cms.adminRoute')."/");
 		}
 	}
 
@@ -160,7 +160,7 @@ class EmployeesController extends Controller
 				]);
 			}
 		} else {
-			return redirect(config('laraadmin.adminRoute')."/");
+			return redirect(config('Cms.adminRoute')."/");
 		}
 	}
 
@@ -195,7 +195,7 @@ class EmployeesController extends Controller
 				]);
 			}
 		} else {
-			return redirect(config('laraadmin.adminRoute')."/");
+			return redirect(config('Cms.adminRoute')."/");
 		}
 	}
 
@@ -230,10 +230,10 @@ class EmployeesController extends Controller
 			$role = Role::find($request->role);
 			$user->attachRole($role);
 			
-			return redirect()->route(config('laraadmin.adminRoute') . '.employees.index');
+			return redirect()->route(config('Cms.adminRoute') . '.employees.index');
 			
 		} else {
-			return redirect(config('laraadmin.adminRoute')."/");
+			return redirect(config('Cms.adminRoute')."/");
 		}
 	}
 
@@ -249,9 +249,9 @@ class EmployeesController extends Controller
 			Employee::find($id)->delete();
 			
 			// Redirecting to index() method
-			return redirect()->route(config('laraadmin.adminRoute') . '.employees.index');
+			return redirect()->route(config('Cms.adminRoute') . '.employees.index');
 		} else {
-			return redirect(config('laraadmin.adminRoute')."/");
+			return redirect(config('Cms.adminRoute')."/");
 		}
 	}
 	
@@ -275,7 +275,7 @@ class EmployeesController extends Controller
 					$data->data[$i][$j] = ModuleFields::getFieldValue($fields_popup[$col], $data->data[$i][$j]);
 				}
 				if($col == $this->view_col) {
-					$data->data[$i][$j] = '<a href="'.url(config('laraadmin.adminRoute') . '/employees/'.$data->data[$i][0]).'">'.$data->data[$i][$j].'</a>';
+					$data->data[$i][$j] = '<a href="'.url(config('Cms.adminRoute') . '/employees/'.$data->data[$i][0]).'">'.$data->data[$i][$j].'</a>';
 				}
 				// else if($col == "author") {
 				//    $data->data[$i][$j];
@@ -285,11 +285,11 @@ class EmployeesController extends Controller
 			if($this->show_action) {
 				$output = '';
 				if(Module::hasAccess("Employees", "edit")) {
-					$output .= '<a href="'.url(config('laraadmin.adminRoute') . '/employees/'.$data->data[$i][0].'/edit').'" class="btn btn-warning btn-xs" style="display:inline;padding:2px 5px 3px 5px;"><i class="fa fa-edit"></i></a>';
+					$output .= '<a href="'.url(config('Cms.adminRoute') . '/employees/'.$data->data[$i][0].'/edit').'" class="btn btn-warning btn-xs" style="display:inline;padding:2px 5px 3px 5px;"><i class="fa fa-edit"></i></a>';
 				}
 				
 				if(Module::hasAccess("Employees", "delete")) {
-					$output .= Form::open(['route' => [config('laraadmin.adminRoute') . '.employees.destroy', $data->data[$i][0]], 'method' => 'delete', 'style'=>'display:inline']);
+					$output .= Form::open(['route' => [config('Cms.adminRoute') . '.employees.destroy', $data->data[$i][0]], 'method' => 'delete', 'style'=>'display:inline']);
 					$output .= ' <button class="btn btn-danger btn-xs" type="submit"><i class="fa fa-times"></i></button>';
 					$output .= Form::close();
 				}
@@ -313,7 +313,7 @@ class EmployeesController extends Controller
         ]);
 		
 		if ($validator->fails()) {
-			return \Redirect::to(config('laraadmin.adminRoute') . '/employees/'.$id)->withErrors($validator);
+			return \Redirect::to(config('Cms.adminRoute') . '/employees/'.$id)->withErrors($validator);
 		}
 		
 		$employee = Employee::find($id);
@@ -328,12 +328,12 @@ class EmployeesController extends Controller
 			// Send mail to User his new Password
 			Mail::send('emails.send_login_cred_change', ['user' => $user, 'password' => $request->password], function ($m) use ($user) {
 				$m->from(LAConfigs::getByKey('default_email'), LAConfigs::getByKey('sitename'));
-				$m->to($user->email, $user->name)->subject('LaraAdmin - Login Credentials chnaged');
+				$m->to($user->email, $user->name)->subject('Cms - Login Credentials chnaged');
 			});
 		} else {
 			Log::info("User change_password: username: ".$user->email." Password: ".$request->password);
 		}
 		
-		return redirect(config('laraadmin.adminRoute') . '/employees/'.$id.'#tab-account-settings');
+		return redirect(config('Cms.adminRoute') . '/employees/'.$id.'#tab-account-settings');
 	}
 }

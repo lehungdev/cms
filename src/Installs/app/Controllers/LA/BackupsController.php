@@ -1,7 +1,7 @@
 <?php
 /**
- * Controller generated using LaraAdmin
- * Help: http://laraadmin.com
+ * Controller generated using Cms
+ * Help: http://Cms.com
  */
 
 namespace App\Http\Controllers\LA;
@@ -55,7 +55,7 @@ class BackupsController extends Controller
 				'module' => $module
 			]);
 		} else {
-            return redirect(config('laraadmin.adminRoute')."/");
+            return redirect(config('Cms.adminRoute')."/");
         }
 	}
 
@@ -133,9 +133,9 @@ class BackupsController extends Controller
 			$backup->delete();
 			
 			// Redirecting to index() method
-			return redirect()->route(config('laraadmin.adminRoute') . '.backups.index');
+			return redirect()->route(config('Cms.adminRoute') . '.backups.index');
 		} else {
-			return redirect(config('laraadmin.adminRoute')."/");
+			return redirect(config('Cms.adminRoute')."/");
 		}
 	}
 	
@@ -159,7 +159,7 @@ class BackupsController extends Controller
 					$data->data[$i][$j] = ModuleFields::getFieldValue($fields_popup[$col], $data->data[$i][$j]);
 				}
 				if($col == $this->view_col) {
-					$data->data[$i][$j] = '<a href="'.url(config('laraadmin.adminRoute') . '/backups/'.$data->data[$i][0]).'">'.$data->data[$i][$j].'</a>';
+					$data->data[$i][$j] = '<a href="'.url(config('Cms.adminRoute') . '/backups/'.$data->data[$i][0]).'">'.$data->data[$i][$j].'</a>';
 				} else if($col == "file_name") {
 				   $data->data[$i][$j] = $this->backup_filepath.$data->data[$i][$j];
 				}
@@ -167,10 +167,10 @@ class BackupsController extends Controller
 			
 			if($this->show_action) {
 				$output = '';
-				$output .= '<a href="'.url(config('laraadmin.adminRoute') . '/downloadBackup/'.$data->data[$i][0]).'" class="btn btn-warning btn-xs" style="display:inline;padding:2px 5px 3px 5px;"><i class="fa fa-download"></i></a>';
+				$output .= '<a href="'.url(config('Cms.adminRoute') . '/downloadBackup/'.$data->data[$i][0]).'" class="btn btn-warning btn-xs" style="display:inline;padding:2px 5px 3px 5px;"><i class="fa fa-download"></i></a>';
 				
 				if(Module::hasAccess("Backups", "delete")) {
-					$output .= Form::open(['route' => [config('laraadmin.adminRoute') . '.backups.destroy', $data->data[$i][0]], 'method' => 'delete', 'style'=>'display:inline']);
+					$output .= Form::open(['route' => [config('Cms.adminRoute') . '.backups.destroy', $data->data[$i][0]], 'method' => 'delete', 'style'=>'display:inline']);
 					$output .= ' <button class="btn btn-danger btn-xs" type="submit"><i class="fa fa-times"></i></button>';
 					$output .= Form::close();
 				}

@@ -1,7 +1,7 @@
 <?php
 /**
- * Controller generated using LaraAdmin
- * Help: http://laraadmin.com
+ * Controller generated using Cms
+ * Help: http://Cms.com
  */
 
 namespace App\Http\Controllers\LA;
@@ -55,7 +55,7 @@ class RolesController extends Controller
 				'module' => $module
 			]);
 		} else {
-            return redirect(config('laraadmin.adminRoute')."/");
+            return redirect(config('Cms.adminRoute')."/");
         }
 	}
 
@@ -100,10 +100,10 @@ class RolesController extends Controller
 			$perm = Permission::where("name", "ADMIN_PANEL")->first();
 			$role->attachPermission($perm);
 
-			return redirect()->route(config('laraadmin.adminRoute') . '.roles.index');
+			return redirect()->route(config('Cms.adminRoute') . '.roles.index');
 
 		} else {
-			return redirect(config('laraadmin.adminRoute')."/");
+			return redirect(config('Cms.adminRoute')."/");
 		}
 	}
 
@@ -142,7 +142,7 @@ class RolesController extends Controller
 				]);
 			}
 		} else {
-			return redirect(config('laraadmin.adminRoute')."/");
+			return redirect(config('Cms.adminRoute')."/");
 		}
 	}
 
@@ -173,7 +173,7 @@ class RolesController extends Controller
 				]);
 			}
 		} else {
-			return redirect(config('laraadmin.adminRoute')."/");
+			return redirect(config('Cms.adminRoute')."/");
 		}
 	}
 
@@ -204,10 +204,10 @@ class RolesController extends Controller
 
 			$insert_id = Module::updateRow("Roles", $request, $id);
 
-			return redirect()->route(config('laraadmin.adminRoute') . '.roles.index');
+			return redirect()->route(config('Cms.adminRoute') . '.roles.index');
 
 		} else {
-			return redirect(config('laraadmin.adminRoute')."/");
+			return redirect(config('Cms.adminRoute')."/");
 		}
 	}
 
@@ -223,9 +223,9 @@ class RolesController extends Controller
 			Role::find($id)->delete();
 
 			// Redirecting to index() method
-			return redirect()->route(config('laraadmin.adminRoute') . '.roles.index');
+			return redirect()->route(config('Cms.adminRoute') . '.roles.index');
 		} else {
-			return redirect(config('laraadmin.adminRoute')."/");
+			return redirect(config('Cms.adminRoute')."/");
 		}
 	}
 
@@ -249,7 +249,7 @@ class RolesController extends Controller
 					$data->data[$i][$j] = ModuleFields::getFieldValue($fields_popup[$col], $data->data[$i][$j]);
 				}
 				if($col == $this->view_col) {
-					$data->data[$i][$j] = '<a href="'.url(config('laraadmin.adminRoute') . '/roles/'.$data->data[$i][0]).'">'.$data->data[$i][$j].'</a>';
+					$data->data[$i][$j] = '<a href="'.url(config('Cms.adminRoute') . '/roles/'.$data->data[$i][0]).'">'.$data->data[$i][$j].'</a>';
 				}
 				// else if($col == "author") {
 				//    $data->data[$i][$j];
@@ -259,11 +259,11 @@ class RolesController extends Controller
 			if($this->show_action) {
 				$output = '';
 				if(Module::hasAccess("Roles", "edit")) {
-					$output .= '<a href="'.url(config('laraadmin.adminRoute') . '/roles/'.$data->data[$i][0].'/edit').'" class="btn btn-warning btn-xs" style="display:inline;padding:2px 5px 3px 5px;"><i class="fa fa-edit"></i></a>';
+					$output .= '<a href="'.url(config('Cms.adminRoute') . '/roles/'.$data->data[$i][0].'/edit').'" class="btn btn-warning btn-xs" style="display:inline;padding:2px 5px 3px 5px;"><i class="fa fa-edit"></i></a>';
 				}
 
 				if(Module::hasAccess("Roles", "delete")) {
-					$output .= Form::open(['route' => [config('laraadmin.adminRoute') . '.roles.destroy', $data->data[$i][0]], 'method' => 'delete', 'style'=>'display:inline']);
+					$output .= Form::open(['route' => [config('Cms.adminRoute') . '.roles.destroy', $data->data[$i][0]], 'method' => 'delete', 'style'=>'display:inline']);
 					$output .= ' <button class="btn btn-danger btn-xs" type="submit"><i class="fa fa-times"></i></button>';
 					$output .= Form::close();
 				}
@@ -352,9 +352,9 @@ class RolesController extends Controller
 					DB:: table('role_module')->where('role_id', $id)->where('module_id', $module->id)->update(['acc_view' => 0, 'acc_create' => 0, 'acc_edit' => 0, 'acc_delete' => 0]);
 				}
 			}
-			return redirect(config('laraadmin.adminRoute') . '/roles/'.$id.'#tab-access');
+			return redirect(config('Cms.adminRoute') . '/roles/'.$id.'#tab-access');
 		} else {
-			return redirect(config('laraadmin.adminRoute')."/");
+			return redirect(config('Cms.adminRoute')."/");
 		}
 	}
 }

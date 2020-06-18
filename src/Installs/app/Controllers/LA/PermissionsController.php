@@ -1,7 +1,7 @@
 <?php
 /**
- * Controller generated using LaraAdmin
- * Help: http://laraadmin.com
+ * Controller generated using Cms
+ * Help: http://Cms.com
  */
 
 namespace App\Http\Controllers\LA;
@@ -56,7 +56,7 @@ class PermissionsController extends Controller
 				'module' => $module
 			]);
 		} else {
-            return redirect(config('laraadmin.adminRoute')."/");
+            return redirect(config('Cms.adminRoute')."/");
         }
 	}
 
@@ -90,10 +90,10 @@ class PermissionsController extends Controller
 
 			$insert_id = Module::insert("Permissions", $request);
 
-			return redirect()->route(config('laraadmin.adminRoute') . '.permissions.index');
+			return redirect()->route(config('Cms.adminRoute') . '.permissions.index');
 
 		} else {
-			return redirect(config('laraadmin.adminRoute')."/");
+			return redirect(config('Cms.adminRoute')."/");
 		}
 	}
 
@@ -128,7 +128,7 @@ class PermissionsController extends Controller
 				]);
 			}
 		} else {
-			return redirect(config('laraadmin.adminRoute')."/");
+			return redirect(config('Cms.adminRoute')."/");
 		}
 	}
 
@@ -157,7 +157,7 @@ class PermissionsController extends Controller
 				]);
 			}
 		} else {
-			return redirect(config('laraadmin.adminRoute')."/");
+			return redirect(config('Cms.adminRoute')."/");
 		}
 	}
 
@@ -182,10 +182,10 @@ class PermissionsController extends Controller
 
 			$insert_id = Module::updateRow("Permissions", $request, $id);
 
-			return redirect()->route(config('laraadmin.adminRoute') . '.permissions.index');
+			return redirect()->route(config('Cms.adminRoute') . '.permissions.index');
 
 		} else {
-			return redirect(config('laraadmin.adminRoute')."/");
+			return redirect(config('Cms.adminRoute')."/");
 		}
 	}
 
@@ -201,9 +201,9 @@ class PermissionsController extends Controller
 			Permission::find($id)->delete();
 
 			// Redirecting to index() method
-			return redirect()->route(config('laraadmin.adminRoute') . '.permissions.index');
+			return redirect()->route(config('Cms.adminRoute') . '.permissions.index');
 		} else {
-			return redirect(config('laraadmin.adminRoute')."/");
+			return redirect(config('Cms.adminRoute')."/");
 		}
 	}
 
@@ -227,7 +227,7 @@ class PermissionsController extends Controller
 					$data->data[$i][$j] = ModuleFields::getFieldValue($fields_popup[$col], $data->data[$i][$j]);
 				}
 				if($col == $this->view_col) {
-					$data->data[$i][$j] = '<a href="'.url(config('laraadmin.adminRoute') . '/permissions/'.$data->data[$i][0]).'">'.$data->data[$i][$j].'</a>';
+					$data->data[$i][$j] = '<a href="'.url(config('Cms.adminRoute') . '/permissions/'.$data->data[$i][0]).'">'.$data->data[$i][$j].'</a>';
 				}
 				// else if($col == "author") {
 				//    $data->data[$i][$j];
@@ -237,11 +237,11 @@ class PermissionsController extends Controller
 			if($this->show_action) {
 				$output = '';
 				if(Module::hasAccess("Permissions", "edit")) {
-					$output .= '<a href="'.url(config('laraadmin.adminRoute') . '/permissions/'.$data->data[$i][0].'/edit').'" class="btn btn-warning btn-xs" style="display:inline;padding:2px 5px 3px 5px;"><i class="fa fa-edit"></i></a>';
+					$output .= '<a href="'.url(config('Cms.adminRoute') . '/permissions/'.$data->data[$i][0].'/edit').'" class="btn btn-warning btn-xs" style="display:inline;padding:2px 5px 3px 5px;"><i class="fa fa-edit"></i></a>';
 				}
 
 				if(Module::hasAccess("Permissions", "delete")) {
-					$output .= Form::open(['route' => [config('laraadmin.adminRoute') . '.permissions.destroy', $data->data[$i][0]], 'method' => 'delete', 'style'=>'display:inline']);
+					$output .= Form::open(['route' => [config('Cms.adminRoute') . '.permissions.destroy', $data->data[$i][0]], 'method' => 'delete', 'style'=>'display:inline']);
 					$output .= ' <button class="btn btn-danger btn-xs" type="submit"><i class="fa fa-times"></i></button>';
 					$output .= Form::close();
 				}
@@ -281,9 +281,9 @@ class PermissionsController extends Controller
 					}
 				}
 			}
-			return redirect(config('laraadmin.adminRoute') . '/permissions/'.$id."#tab-access");
+			return redirect(config('Cms.adminRoute') . '/permissions/'.$id."#tab-access");
 		} else {
-			return redirect(config('laraadmin.adminRoute')."/");
+			return redirect(config('Cms.adminRoute')."/");
 		}
 	}
 }

@@ -1,7 +1,7 @@
 <?php
 /**
- * Controller generated using LaraAdmin
- * Help: http://laraadmin.com
+ * Controller generated using Cms
+ * Help: http://Cms.com
  */
 
 namespace Lehungdev\Cms\Controllers;
@@ -62,7 +62,7 @@ class FieldController extends Controller
 		$role = \App\Role::where("name", "SUPER_ADMIN")->first();
 		Module::setDefaultFieldRoleAccess($field_id, $role->id, "full");
 		
-		return redirect()->route(config('laraadmin.adminRoute') . '.modules.show', [$module_id]);
+		return redirect()->route(config('Cms.adminRoute') . '.modules.show', [$module_id]);
 	}
 
 	/**
@@ -118,7 +118,7 @@ class FieldController extends Controller
 		
 		ModuleFields::updateField($id, $request);
 		
-		return redirect()->route(config('laraadmin.adminRoute') . '.modules.show', [$module_id]);
+		return redirect()->route(config('Cms.adminRoute') . '.modules.show', [$module_id]);
 	}
 
 	/**
@@ -140,7 +140,7 @@ class FieldController extends Controller
 		
 		// Delete Context
 		$field->delete();
-		return redirect()->route(config('laraadmin.adminRoute') . '.modules.show', [$module->id]);
+		return redirect()->route(config('Cms.adminRoute') . '.modules.show', [$module->id]);
 	}
 	
 	/**

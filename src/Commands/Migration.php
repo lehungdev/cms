@@ -20,7 +20,7 @@ class Migration extends Command
      *
      * @var string
      */
-    protected $description = 'Genrate Migrations for LaraAdmin';
+    protected $description = 'Genrate Migrations for Cms';
 
     /**
      * Generate a CRUD files inclusing Controller, Model and Routes

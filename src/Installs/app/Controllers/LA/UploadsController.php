@@ -1,7 +1,7 @@
 <?php
 /**
- * Controller generated using LaraAdmin
- * Help: http://laraadmin.com
+ * Controller generated using Cms
+ * Help: http://Cms.com
  */
 
 namespace App\Http\Controllers\LA;
@@ -64,7 +64,7 @@ class UploadsController extends Controller
 				'module' => $module
 			]);
 		} else {
-            return redirect(config('laraadmin.adminRoute')."/");
+            return redirect(config('Cms.adminRoute')."/");
         }
 	}
 
@@ -176,7 +176,7 @@ class UploadsController extends Controller
 				if( $upload_success ) {
 
 					// Get public preferences
-					// config("laraadmin.uploads.default_public")
+					// config("Cms.uploads.default_public")
 					$public = Input::get('public');
 					if(isset($public)) {
 						$public = true;
@@ -237,7 +237,7 @@ class UploadsController extends Controller
 			if(Entrust::hasRole('SUPER_ADMIN')) {
 				$uploads = Upload::all();
 			} else {
-				if(config('laraadmin.uploads.private_uploads')) {
+				if(config('Cms.uploads.private_uploads')) {
 					// Upload::where('user_id', 0)->first();
 					$uploads = Auth::user()->uploads;
 				} else {

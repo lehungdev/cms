@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
 	public function run()
 	{
 		
-		/* ================ LaraAdmin Seeder Code ================ */
+		/* ================ Cms Seeder Code ================ */
 		
 		// Generating Module Menus
 		$modules = Module::all();
@@ -80,11 +80,11 @@ class DatabaseSeeder extends Seeder
 		
 		$role->attachPermission($perm);
 		
-		// Generate LaraAdmin Default Configurations
+		// Generate Cms Default Configurations
 		
 		$laconfig = new LAConfigs;
 		$laconfig->key = "sitename";
-		$laconfig->value = "LaraAdmin 1.0";
+		$laconfig->value = "Cms 1.0";
 		$laconfig->save();
 
 		$laconfig = new LAConfigs;
@@ -104,7 +104,7 @@ class DatabaseSeeder extends Seeder
 
 		$laconfig = new LAConfigs;
 		$laconfig->key = "site_description";
-		$laconfig->value = "LaraAdmin is a open-source Laravel Admin Panel for quick-start Admin based applications and boilerplate for CRM or CMS systems.";
+		$laconfig->value = "Cms is a open-source Laravel Admin Panel for quick-start Admin based applications and boilerplate for CRM or CMS systems.";
 		$laconfig->save();
 
 		// Display Configurations
