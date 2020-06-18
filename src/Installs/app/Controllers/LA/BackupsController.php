@@ -29,7 +29,7 @@ class BackupsController extends Controller
 	
 	public function __construct() {
 		// Field Access of Listing Columns
-		if(LAHelper::laravel_ver() == 5.3) {
+		if(LAHelper::laravel_ver() > 5.3) {
 			$this->middleware(function ($request, $next) {
 				$this->listing_cols = ModuleFields::listingColumnAccessScan('Backups', $this->listing_cols);
 				return $next($request);

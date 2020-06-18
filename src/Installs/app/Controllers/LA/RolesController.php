@@ -29,7 +29,7 @@ class RolesController extends Controller
 	
 	public function __construct() {
 		// Field Access of Listing Columns
-		if(\Dwij\Laraadmin\Helpers\LAHelper::laravel_ver() == 5.3) {
+		if(\Dwij\Laraadmin\Helpers\LAHelper::laravel_ver() > 5.3) {
 			$this->middleware(function ($request, $next) {
 				$this->listing_cols = ModuleFields::listingColumnAccessScan('Roles', $this->listing_cols);
 				return $next($request);
