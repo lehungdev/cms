@@ -9,7 +9,10 @@
         "illuminate/container": "^7.10.3",
         "yajra/laravel-datatables-oracle": "^9.10.2",
         "creativeorange/gravatar": "^1.0.14",
-        "doctrine/dbal": "~2.10.2"
+        "doctrine/dbal": "~2.10.2",
+        "zizaco/entrust": "5.2.x-dev",
+        "spatie/laravel-backup": "^6.11.0"
+
     },
     "authors": [
         {
