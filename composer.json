@@ -4,11 +4,9 @@
     "keywords": ["php", "laravel", "crm", "admin", "cms", "administrator"],
     "license": "MIT",
     "require": {
-        "yajra/laravel-datatables-oracle": "^9.10.2",
-        "creativeorange/gravatar": "^1.0.14",
-        "doctrine/dbal": "~2.10.2",
-        "zizaco/entrust": "1.9.1",
-        "spatie/laravel-backup": "^6.11.0"
+        "illuminate/support": "^7.10.3",
+        "laravelcollective/html": "^6.1.2",
+        "illuminate/container": "^7.10.3"
     },
     "authors": [
         {
