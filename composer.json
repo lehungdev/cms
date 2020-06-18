@@ -6,7 +6,9 @@
     "require": {
         "illuminate/support": "^7.10.3",
         "laravelcollective/html": "^6.1.2",
-        "illuminate/container": "^7.10.3"
+        "illuminate/container": "^7.10.3",
+        "yajra/laravel-datatables-oracle": "^9.10.2",
+        "creativeorange/gravatar": "^1.0.14"
     },
     "authors": [
         {
