@@ -168,7 +168,7 @@ class CodeGenerator
         $templateDirectory = __DIR__ . '/stubs';
 
         LAHelper::log("info", "Appending routes...", $comm);
-        if(\Lehungdev\Cms\Helpers\LAHelper::laravel_ver() > 5.3) {
+        if(\Lehungdev\Cms\Helpers\LAHelper::laravel_ver() != 5.3) {
             $routesFile = base_path('routes/admin_routes.php');
         } else {
             $routesFile = app_path('Http/admin_routes.php');
