@@ -17,7 +17,7 @@ use Collective\Html\FormFacade as Form;
 use Dwij\Laraadmin\Models\Module;
 use Dwij\Laraadmin\Models\ModuleFields;
 use Dwij\Laraadmin\Helpers\LAHelper;
-use Zizaco\Entrust\EntrustFacade as Entrust;
+use Trebol\Entrust\EntrustFacade as Entrust;
 
 use App\Permission;
 use App\Role;
@@ -27,7 +27,7 @@ class PermissionsController extends Controller
 	public $show_action = true;
 	public $view_col = 'name';
 	public $listing_cols = ['id', 'name', 'display_name'];
-	
+
 	public function __construct() {
 		// Field Access of Listing Columns
 		if(\Dwij\Laraadmin\Helpers\LAHelper::laravel_ver() > 5.3) {
@@ -39,7 +39,7 @@ class PermissionsController extends Controller
 			$this->listing_cols = ModuleFields::listingColumnAccessScan('Permissions', $this->listing_cols);
 		}
 	}
-	
+
 	/**
 	 * Display a listing of the Permissions.
 	 *
@@ -48,7 +48,7 @@ class PermissionsController extends Controller
 	public function index()
 	{
 		$module = Module::get('Permissions');
-		
+
 		if(Module::hasAccess($module->id)) {
 			return View('la.permissions.index', [
 				'show_actions' => $this->show_action,
@@ -79,19 +79,19 @@ class PermissionsController extends Controller
 	public function store(Request $request)
 	{
 		if(Module::hasAccess("Permissions", "create")) {
-		
+
 			$rules = Module::validateRules("Permissions", $request);
-			
+
 			$validator = Validator::make($request->all(), $rules);
-			
+
 			if ($validator->fails()) {
 				return redirect()->back()->withErrors($validator)->withInput();
 			}
-			
+
 			$insert_id = Module::insert("Permissions", $request);
-			
+
 			return redirect()->route(config('laraadmin.adminRoute') . '.permissions.index');
-			
+
 		} else {
 			return redirect(config('laraadmin.adminRoute')."/");
 		}
@@ -106,14 +106,14 @@ class PermissionsController extends Controller
 	public function show($id)
 	{
 		if(Module::hasAccess("Permissions", "view")) {
-			
+
 			$permission = Permission::find($id);
 			if(isset($permission->id)) {
 				$module = Module::get('Permissions');
 				$module->row = $permission;
-				
+
 				$roles = Role::all();
-				
+
 				return view('la.permissions.show', [
 					'module' => $module,
 					'view_col' => $this->view_col,
@@ -143,9 +143,9 @@ class PermissionsController extends Controller
 		if(Module::hasAccess("Permissions", "edit")) {
 			$permission = Permission::find($id);
 			if(isset($permission->id)) {
-				$module = Module::get('Permissions');				
+				$module = Module::get('Permissions');
 				$module->row = $permission;
-				
+
 				return view('la.permissions.edit', [
 					'module' => $module,
 					'view_col' => $this->view_col,
@@ -171,19 +171,19 @@ class PermissionsController extends Controller
 	public function update(Request $request, $id)
 	{
 		if(Module::hasAccess("Permissions", "edit")) {
-			
+
 			$rules = Module::validateRules("Permissions", $request, true);
-			
+
 			$validator = Validator::make($request->all(), $rules);
-			
+
 			if ($validator->fails()) {
 				return redirect()->back()->withErrors($validator)->withInput();;
 			}
-			
+
 			$insert_id = Module::updateRow("Permissions", $request, $id);
-			
+
 			return redirect()->route(config('laraadmin.adminRoute') . '.permissions.index');
-			
+
 		} else {
 			return redirect(config('laraadmin.adminRoute')."/");
 		}
@@ -199,14 +199,14 @@ class PermissionsController extends Controller
 	{
 		if(Module::hasAccess("Permissions", "delete")) {
 			Permission::find($id)->delete();
-			
+
 			// Redirecting to index() method
 			return redirect()->route(config('laraadmin.adminRoute') . '.permissions.index');
 		} else {
 			return redirect(config('laraadmin.adminRoute')."/");
 		}
 	}
-	
+
 	/**
 	 * Datatable Ajax fetch
 	 *
@@ -219,9 +219,9 @@ class PermissionsController extends Controller
 		$data = $out->getData();
 
 		$fields_popup = ModuleFields::getModuleFields('Permissions');
-		
+
 		for($i=0; $i < count($data->data); $i++) {
-			for ($j=0; $j < count($this->listing_cols); $j++) { 
+			for ($j=0; $j < count($this->listing_cols); $j++) {
 				$col = $this->listing_cols[$j];
 				if($fields_popup[$col] != null && starts_with($fields_popup[$col]->popup_vals, "@")) {
 					$data->data[$i][$j] = ModuleFields::getFieldValue($fields_popup[$col], $data->data[$i][$j]);
@@ -233,13 +233,13 @@ class PermissionsController extends Controller
 				//    $data->data[$i][$j];
 				// }
 			}
-			
+
 			if($this->show_action) {
 				$output = '';
 				if(Module::hasAccess("Permissions", "edit")) {
 					$output .= '<a href="'.url(config('laraadmin.adminRoute') . '/permissions/'.$data->data[$i][0].'/edit').'" class="btn btn-warning btn-xs" style="display:inline;padding:2px 5px 3px 5px;"><i class="fa fa-edit"></i></a>';
 				}
-				
+
 				if(Module::hasAccess("Permissions", "delete")) {
 					$output .= Form::open(['route' => [config('laraadmin.adminRoute') . '.permissions.destroy', $data->data[$i][0]], 'method' => 'delete', 'style'=>'display:inline']);
 					$output .= ' <button class="btn btn-danger btn-xs" type="submit"><i class="fa fa-times"></i></button>';
@@ -251,7 +251,7 @@ class PermissionsController extends Controller
 		$out->setData($data);
 		return $out;
 	}
-	
+
 	/**
 	 * Save the  permissions for role in permission view.
 	 *
@@ -265,7 +265,7 @@ class PermissionsController extends Controller
 			$module = Module::get('Permissions');
 			$module->row = $permission;
 			$roles = Role::all();
-			
+
 			foreach ($roles as $role) {
 				$permi_role_id = 'permi_role_'.$role->id;
 				$permission_set = $request->$permi_role_id;

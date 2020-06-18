@@ -14,7 +14,7 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
 use Illuminate\Database\Eloquent\Model;
 // use Illuminate\Database\Eloquent\SoftDeletes;
-use Zizaco\Entrust\Traits\EntrustUserTrait;
+use Trebol\Entrust\Traits\EntrustUserTrait;
 
 class User extends Authenticatable implements AuthorizableContract, CanResetPasswordContract
 {
@@ -24,7 +24,7 @@ class User extends Authenticatable implements AuthorizableContract, CanResetPass
     use EntrustUserTrait;
 
     protected $table = 'users';
-	
+
 	/**
      * The attributes that are mass assignable.
      *
@@ -33,7 +33,7 @@ class User extends Authenticatable implements AuthorizableContract, CanResetPass
 	protected $fillable = [
 		'name', 'email', 'password', "role", "context_id", "type"
 	];
-	
+
 	/**
      * The attributes that should be hidden for arrays.
      *
@@ -42,7 +42,7 @@ class User extends Authenticatable implements AuthorizableContract, CanResetPass
 	protected $hidden = [
 		'password', 'remember_token',
     ];
-    
+
     // protected $dates = ['deleted_at'];
 
     /**
